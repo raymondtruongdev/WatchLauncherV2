@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
-import 'package:watchlauncher/src/widget_demo.dart';
+import 'package:watch_launcher/src/widget_demo.dart';
 
 class PageWatchFaceList extends StatefulWidget {
   const PageWatchFaceList({Key? key}) : super(key: key);

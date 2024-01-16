@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watchlauncher/src/page_template.dart';
+import 'package:watch_launcher/src/page_template.dart';
 
 class WidgetTextButtonCircle extends StatelessWidget {
   final String text;

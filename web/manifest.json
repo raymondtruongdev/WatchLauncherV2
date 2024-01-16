@@ -1,6 +1,6 @@
 {
-    "name": "watchlauncher",
-    "short_name": "watchlauncher",
+    "name": "watch_launcher",
+    "short_name": "watch_launcher",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

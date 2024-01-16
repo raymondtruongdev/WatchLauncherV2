@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:watchlauncher/src/page_template.dart';
+import 'package:watch_launcher/src/page_template.dart';
 
 // WatchFaceDigital01(mycolor: Colors.red)
 

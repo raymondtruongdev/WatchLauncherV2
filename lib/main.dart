@@ -3,10 +3,10 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
-import 'package:watchlauncher/pages/page_watchface.dart';
-import 'package:watchlauncher/pages/page_installed_apps.dart';
-import 'package:watchlauncher/src/get_app.dart';
-import 'package:watchlauncher/src/widget_demo.dart';
+import 'package:watch_launcher/pages/page_installed_apps.dart';
+import 'package:watch_launcher/pages/page_watchface.dart';
+import 'package:watch_launcher/src/get_app.dart';
+import 'package:watch_launcher/src/widget_demo.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 List<Widget> pages = [];
