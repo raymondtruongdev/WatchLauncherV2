@@ -4,9 +4,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 import 'package:watchlauncher/pages/page_watchface.dart';
-
 import 'package:watchlauncher/pages/page_installed_apps.dart';
-
 import 'package:watchlauncher/src/get_app.dart';
 import 'package:watchlauncher/src/widget_demo.dart';
 
@@ -48,8 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
     pages = [
       const WidgetTextCircle(text: 'PAGE1', color: Colors.grey),
       PageInstalledApps(apps: apps),
-      const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
+      // const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
       const PageWatchFace(),
+      // const WatchFaceDigital01(mycolor: Colors.red),
       WidgetTextButtonCircle(
           text: 'PAGE4',
           color: Colors.white,
@@ -72,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LoopPageView.builder(
-        controller: LoopPageController(initialPage: 3),
+        controller: LoopPageController(initialPage: 2),
         scrollDirection: Axis.horizontal,
         itemCount: pages.length,
         itemBuilder: (context, index) {

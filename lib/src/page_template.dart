@@ -11,6 +11,7 @@ class PageTemplate extends StatelessWidget {
     double maxScreen = 384;
     double widthScreen = MediaQuery.of(context).size.width;
     double watchSize = widthScreen.clamp(0, maxScreen);
+    // watchSize = 300;
 
     return Scaffold(
       backgroundColor: Colors.black,

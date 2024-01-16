@@ -1,15 +1,17 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 import 'package:watchlauncher/src/widget_demo.dart';
 
-class PageList extends StatefulWidget {
-  const PageList({Key? key}) : super(key: key);
+class PageWatchFaceList extends StatefulWidget {
+  const PageWatchFaceList({Key? key}) : super(key: key);
 
   @override
-  _PageListState createState() => _PageListState();
+  _PageWatchFaceListState createState() => _PageWatchFaceListState();
 }
 
-class _PageListState extends State<PageList> {
+class _PageWatchFaceListState extends State<PageWatchFaceList> {
   List<Widget> pages = [];
 
   @override
