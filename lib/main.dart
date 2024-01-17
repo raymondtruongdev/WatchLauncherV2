@@ -10,24 +10,16 @@ import 'pages/page_watchface.dart';
 import 'utilts/get_app.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
-final LoopPageController _loopPageController =
-    LoopPageController(initialPage: 3);
+final LoopPageController _loopPageController = LoopPageController(
+    initialPage: 3,
+    scrollMode: LoopScrollMode.shortest,
+    activationMode: LoopActivationMode.immediate);
 List<Widget> pages = [];
 
 void main() {
-  runApp(const MyApp());
-}
+  // runApp(const MyHomePage());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'ScrollConfiguration Demo',
-      home: MyHomePage(),
-    );
-  }
+  runApp(const MaterialApp(home: MyHomePage()));
 }
 
 class MyHomePage extends StatefulWidget {
