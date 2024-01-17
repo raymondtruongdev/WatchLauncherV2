@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
-import 'package:watch_launcher/src/page_template.dart';
+
+import '../template/page_template.dart';
 
 class PageInstalledApps extends StatelessWidget {
   final Future<List<Application>> apps;

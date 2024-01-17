@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/complication.dart';
 import 'package:watch_launcher/clock_widget/clock_analog_01.dart';
-import 'package:watch_launcher/src/page_template.dart';
+
+import '../../template/page_template.dart';
 
 class WatchFaceAnalog01 extends StatefulWidget {
   const WatchFaceAnalog01({super.key});

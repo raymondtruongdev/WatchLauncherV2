@@ -3,12 +3,15 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
-import 'package:watch_launcher/pages/page_installed_apps.dart';
-import 'package:watch_launcher/pages/page_watchface.dart';
-import 'package:watch_launcher/src/get_app.dart';
-import 'package:watch_launcher/src/widget_demo.dart';
+
+import 'clock_widget/widget_demo.dart';
+import 'pages/page_installed_apps.dart';
+import 'pages/page_watchface.dart';
+import 'utilts/get_app.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
+final LoopPageController _loopPageController =
+    LoopPageController(initialPage: 3);
 List<Widget> pages = [];
 
 void main() {
@@ -64,6 +67,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       pages.add(WidgetTextCircle(
           text: 'NEW PAGE (${pages.length + 1})', color: Colors.orange));
+
+      // Go to the second page (index 1)
+      _loopPageController.animateToPage(
+        2,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
     });
   }
 
@@ -71,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LoopPageView.builder(
-        controller: LoopPageController(initialPage: 2),
+        controller: _loopPageController,
         scrollDirection: Axis.horizontal,
         itemCount: pages.length,
         itemBuilder: (context, index) {

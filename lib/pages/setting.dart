@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:watch_launcher/src/widget_demo.dart';
+
+import '../clock_widget/widget_demo.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
