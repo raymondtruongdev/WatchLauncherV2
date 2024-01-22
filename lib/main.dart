@@ -6,12 +6,13 @@ import 'package:loop_page_view/loop_page_view.dart';
 
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_installed_apps.dart';
+import 'pages/page_installed_appsV2.dart';
 import 'pages/page_watchface.dart';
 import 'utilts/get_app.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 final LoopPageController _loopPageController = LoopPageController(
-    initialPage: 3,
+    initialPage: 1,
     scrollMode: LoopScrollMode.shortest,
     activationMode: LoopActivationMode.immediate);
 List<Widget> pages = [];
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Make inital page list
     pages = [
       const WidgetTextCircle(text: 'PAGE1', color: Colors.grey),
-      PageInstalledApps(apps: apps),
+      PageInstalledAppsV2(apps: apps),
       // const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
       const PageWatchFace(),
       // const WatchFaceDigital01(mycolor: Colors.red),
