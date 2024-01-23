@@ -1,3 +1,7 @@
+// PageView : slide to change page1, page2, page3
+// Default page is page2
+// Press Home Button if current page is page2 do not thing ( not re-render)
+
 import 'package:flutter/material.dart';
 
 final PageController _pageController = PageController(

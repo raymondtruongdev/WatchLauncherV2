@@ -36,7 +36,7 @@ class CircleApp extends StatelessWidget {
               return BubbleLens(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  size: 100,
+                  size: 110,
                   color: Colors.black,
                   widgets: installedApps.map((app) {
                     return GestureDetector(

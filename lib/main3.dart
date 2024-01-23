@@ -31,19 +31,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    createPages();
+    // createPages();
   }
 
   void createPages() {
     // Make inital page list
     pages = [
-      const WidgetTextCircle(text: 'PAGE1', color: Colors.green),
+      const WidgetTextCircle(text: 'PAGE1', color: Colors.grey),
+      PageInstalledAppsV2(apps: apps),
+      // const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
       const PageWatchFace(),
-      const WidgetTextCircle(text: 'PAGE3', color: Colors.blueAccent),
-      // PageInstalledAppsV2(apps: apps),
-      const WatchFaceDigital01(mycolor: Colors.red),
+      // const WatchFaceDigital01(mycolor: Colors.red),
       WidgetTextButtonCircle(
-          text: 'PAGE5',
+          text: 'PAGE4',
           color: Colors.white,
           textButton: 'Add Page',
           onPressed: () {
@@ -81,7 +81,20 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: PageView(
           controller: _pageController,
-          children: pages,
+          children: <Widget>[
+            const WidgetTextCircle(text: 'PAGE1', color: Colors.grey),
+            const PageWatchFace(),
+            const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
+            // PageInstalledAppsV2(apps: apps),
+            const WatchFaceDigital01(mycolor: Colors.red),
+            WidgetTextButtonCircle(
+                text: 'PAGE5',
+                color: Colors.white,
+                textButton: 'Add Page',
+                onPressed: () {
+                  addNewPage();
+                }),
+          ],
         ),
       ),
     );
