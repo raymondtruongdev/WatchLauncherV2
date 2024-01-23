@@ -2,12 +2,14 @@
 
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_launcher/pages/page_watchface_list.dart';
 
 import 'clock_widget/WatchFaceDigital01/wf_digital_01.dart';
 import 'clock_widget/widget_demo.dart';
 
 import 'pages/page_installed_apps_v2.dart';
 import 'pages/page_watchface.dart';
+
 import 'utilts/get_app.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
@@ -37,7 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void createPages() {
     // Make inital page list
     pages = [
-      const WidgetTextCircle(text: 'PAGE1', color: Colors.green),
+      // const WidgetTextCircle(text: 'PAGE1', color: Colors.green),
+      WidgetTextButtonCircle(
+          text: 'PAGE1',
+          color: Colors.white,
+          textButton: 'OPEN APP PAGE',
+          onPressed: () {
+            openWatchFaceListPage();
+          }),
+
       const PageWatchFace(),
       const WidgetTextCircle(text: 'PAGE3', color: Colors.blueAccent),
       // PageInstalledAppsV2(apps: apps),
@@ -52,6 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
+  void openAppPage() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PageInstalledAppsV2(apps: apps)));
+  }
+
+  void openWatchFaceListPage() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const PageWatchFaceList()));
+  }
+
   void addNewPage() {
     // Add new page into pages list
     setState(() {
@@ -59,11 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
           text: 'NEW PAGE (${pages.length + 1})', color: Colors.orange));
 
       // Go to the second page (index 1)
-      _pageController.animateToPage(
-        2,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
+      _pageController.animateToPage(2,
+          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
     });
   }
 
@@ -75,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // Handle the back button press
           final int currentPage = _pageController.page!.round();
           if (currentPage == 1) {
+            openAppPage();
             return false; // Do not allow the system to pop the page
           }
           return true; // Allow the system to pop the page in other cases

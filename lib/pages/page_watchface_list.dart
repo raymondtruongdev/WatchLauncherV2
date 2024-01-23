@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/wf_analog_01.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceDigital01/wf_digital_01.dart';
+import 'package:watch_launcher/pages/page_watchface_selection.dart';
 
 import '../clock_widget/widget_demo.dart';
 
@@ -23,8 +26,13 @@ class _PageWatchFaceListState extends State<PageWatchFaceList> {
 
   void createPages() {
     pages = [
-      const WidgetTextSquare(text: 'WATCHFACE 01', color: Colors.red),
-      const WidgetTextSquare(text: 'WATCHFACE 02', color: Colors.green),
+      const PageWatchFaceSelection(
+          mywiget: WatchFaceDigital01(mycolor: Colors.red)),
+      const PageWatchFaceSelection(
+          mywiget: WatchFaceDigital01(mycolor: Colors.green)),
+      const PageWatchFaceSelection(
+          mywiget: WatchFaceDigital01(mycolor: Colors.blue)),
+      const PageWatchFaceSelection(mywiget: WatchFaceAnalog01()),
       const WidgetTextSquare(text: 'WATCHFACE 03', color: Colors.blue),
       WidgetTextButtonCircle(
         text: 'WATCHFACE 04',
