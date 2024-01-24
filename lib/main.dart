@@ -2,9 +2,7 @@
 
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
-import 'package:watch_launcher/pages/page_watchface_list.dart';
 
-import 'clock_widget/WatchFaceDigital01/wf_digital_01.dart';
 import 'clock_widget/widget_demo.dart';
 
 import 'pages/page_installed_apps_v2.dart';
@@ -45,13 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
           textButton: 'OPEN APP PAGE',
           onPressed: () {
-            openWatchFaceListPage();
+            openAppPage();
           }),
 
       const PageWatchFace(),
       const WidgetTextCircle(text: 'PAGE3', color: Colors.blueAccent),
       // PageInstalledAppsV2(apps: apps),
-      const WatchFaceDigital01(mycolor: Colors.red),
+      const WidgetTextCircle(text: 'PAGE4', color: Colors.green),
       WidgetTextButtonCircle(
           text: 'PAGE5',
           color: Colors.white,
@@ -67,11 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
         context,
         MaterialPageRoute(
             builder: (context) => PageInstalledAppsV2(apps: apps)));
-  }
-
-  void openWatchFaceListPage() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const PageWatchFaceList()));
   }
 
   void addNewPage() {

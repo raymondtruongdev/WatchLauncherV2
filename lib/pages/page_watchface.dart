@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceAnalog02/wf_analog_02.dart';
 import 'package:watch_launcher/pages/page_watchface_list.dart';
 
 import '../clock_widget/WatchFaceAnalog01/wf_analog_01.dart';
@@ -11,12 +12,22 @@ class PageWatchFace extends StatefulWidget {
   State<PageWatchFace> createState() => _PageWatchFaceState();
 }
 
-List<Widget> watchFaceList = [
+List<Widget> demoWatchFaceList = [
   const WatchFaceDigital01(mycolor: Colors.blue),
-  const WatchFaceAnalog01()
+  const WatchFaceAnalog01(),
+  const WatchFaceAnalog02()
 ];
 
+Widget currentWatchFace = demoWatchFaceList[2];
+
 class _PageWatchFaceState extends State<PageWatchFace> {
+  void updateWatchFace(Widget newWatchface) {
+    setState(() {
+      currentWatchFace = newWatchface;
+      Navigator.pop(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // return const WatchFaceDigital01(mycolor: Colors.blue);
@@ -25,9 +36,12 @@ class _PageWatchFaceState extends State<PageWatchFace> {
           // Handle long press here
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PageWatchFaceList()),
+            MaterialPageRoute(
+                builder: (context) => PageWatchFaceList(
+                      updateWatchFace: updateWatchFace,
+                    )),
           );
         },
-        child: watchFaceList[1]);
+        child: currentWatchFace);
   }
 }

@@ -3,13 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:loop_page_view/loop_page_view.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/wf_analog_01.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceAnalog02/wf_analog_02.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceDigital01/wf_digital_01.dart';
-import 'package:watch_launcher/pages/page_watchface_selection.dart';
-
-import '../clock_widget/widget_demo.dart';
+import 'package:watch_launcher/clock_widget/watchface_selection.dart';
 
 class PageWatchFaceList extends StatefulWidget {
-  const PageWatchFaceList({Key? key}) : super(key: key);
+  final Function updateWatchFace;
+
+  const PageWatchFaceList({Key? key, required this.updateWatchFace})
+      : super(key: key);
 
   @override
   _PageWatchFaceListState createState() => _PageWatchFaceListState();
@@ -21,34 +23,27 @@ class _PageWatchFaceListState extends State<PageWatchFaceList> {
   @override
   void initState() {
     super.initState();
-    createPages();
+    createWatchFaceList();
   }
 
-  void createPages() {
+  void createWatchFaceList() {
     pages = [
-      const PageWatchFaceSelection(
-          mywiget: WatchFaceDigital01(mycolor: Colors.red)),
-      const PageWatchFaceSelection(
-          mywiget: WatchFaceDigital01(mycolor: Colors.green)),
-      const PageWatchFaceSelection(
-          mywiget: WatchFaceDigital01(mycolor: Colors.blue)),
-      const PageWatchFaceSelection(mywiget: WatchFaceAnalog01()),
-      const WidgetTextSquare(text: 'WATCHFACE 03', color: Colors.blue),
-      WidgetTextButtonCircle(
-        text: 'WATCHFACE 04',
-        color: Colors.grey,
-        textButton: 'Add WATCHFACE',
-        onPressed: () {
-          addPage();
-        },
-      ),
+      WatchFaceSelection(
+          mywidget: const WatchFaceAnalog02(), onPressed: chosseNewWatchFace),
+      WatchFaceSelection(
+          mywidget: const WatchFaceDigital01(mycolor: Colors.green),
+          onPressed: chosseNewWatchFace),
+      WatchFaceSelection(
+          mywidget: const WatchFaceDigital01(mycolor: Colors.blue),
+          onPressed: chosseNewWatchFace),
+      WatchFaceSelection(
+          mywidget: const WatchFaceAnalog01(), onPressed: chosseNewWatchFace),
     ];
   }
 
-  void addPage() {
+  void chosseNewWatchFace(Widget newWatchface) {
     setState(() {
-      pages.add(WidgetTextSquare(
-          text: ' WATCHFACE (${pages.length + 1})', color: Colors.orange));
+      widget.updateWatchFace(newWatchface);
     });
   }
 
