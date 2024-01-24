@@ -37,6 +37,8 @@ class CircleApp extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   size: 110,
+                  paddingX: 5,
+                  paddingY: 5,
                   color: Colors.black,
                   widgets: installedApps.map((app) {
                     return GestureDetector(

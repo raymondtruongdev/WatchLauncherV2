@@ -54,7 +54,7 @@ class _ClockAnalog02State extends State<ClockAnalog02> {
             ..rotateZ(hourAngle)
             ..translate(-pivotOffsetHour.dx, -pivotOffsetHour.dy),
           child: Image.asset(
-              'lib/clock_widget/WatchFaceAnalog02/hour_hand.png'), // Clock hand image
+              'lib/clock_widget/WatchFaceAnalog02/image/hour_hand.png'), // Clock hand image
         ),
         Transform(
           alignment: Alignment.center,
@@ -62,7 +62,7 @@ class _ClockAnalog02State extends State<ClockAnalog02> {
             ..rotateZ(minuteAngle)
             ..translate(-pivotOffsetMinute.dx, -pivotOffsetMinute.dy),
           child: Image.asset(
-              'lib/clock_widget/WatchFaceAnalog02/minute_hand.png'), // Clock hand image
+              'lib/clock_widget/WatchFaceAnalog02/image/minute_hand.png'), // Clock hand image
         ),
         Transform(
           alignment: Alignment.center,
@@ -70,7 +70,7 @@ class _ClockAnalog02State extends State<ClockAnalog02> {
             ..rotateZ(secondAngle)
             ..translate(-pivotOffsetSecond.dx, -pivotOffsetSecond.dy),
           child: Image.asset(
-              'lib/clock_widget/WatchFaceAnalog02/second_hand.png'), // Clock hand image
+              'lib/clock_widget/WatchFaceAnalog02/image/second_hand.png'), // Clock hand image
         ),
       ],
     );

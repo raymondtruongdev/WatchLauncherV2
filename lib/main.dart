@@ -11,6 +11,7 @@ import 'pages/page_watchface.dart';
 import 'utilts/get_app.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
+Widget pageInstalledApp = PageInstalledAppsV2(apps: apps);
 final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
 
@@ -62,9 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void openAppPage() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => PageInstalledAppsV2(apps: apps)));
+        context, MaterialPageRoute(builder: (context) => pageInstalledApp));
   }
 
   void addNewPage() {
