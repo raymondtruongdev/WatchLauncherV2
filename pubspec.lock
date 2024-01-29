@@ -301,6 +301,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  weather_app:
+    dependency: "direct main"
+    description:
+      path: "packages/weather_app"
+      relative: true
+    source: path
+    version: "0.0.1"
   web:
     dependency: transitive
     description:

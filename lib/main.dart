@@ -10,6 +10,8 @@ import 'pages/page_watchface.dart';
 
 import 'utilts/get_app.dart';
 
+import 'package:flutter/services.dart';
+
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 Widget pageInstalledApp = PageInstalledAppsV2(apps: apps);
 final PageController _pageController = PageController(initialPage: 1);
@@ -18,7 +20,23 @@ List<Widget> pages = [];
 void main() {
   // runApp(const MyHomePage());
 
-  runApp(const MaterialApp(home: MyHomePage()));
+  // runApp(const MaterialApp(home: MyHomePage()));
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Set the system UI overlays to immersive mode
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+    return const MaterialApp(
+      // title: 'Full Screen App',
+      home: MyHomePage(),
+    );
+  }
 }
 
 class MyHomePage extends StatefulWidget {
