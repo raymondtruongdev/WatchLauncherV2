@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:watch_launcher/controller.dart';
 
 class PageTemplate extends StatelessWidget {
   final Widget child;
@@ -10,12 +12,12 @@ class PageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double maxScreen = 384;
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
     double widthScreen = MediaQuery.of(context).size.width;
-    double watchSize = widthScreen.clamp(0, maxScreen);
-    // watchSize = 300;
-    // print(MediaQuery.of(context).size.width);
-    // print(MediaQuery.of(context).size.height);
+    globalController.updateWatchSize(widthScreen);
+    double watchSize = (globalController.getWatchSize().value);
 
     return Scaffold(
       backgroundColor: color,
