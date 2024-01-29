@@ -12,11 +12,11 @@ class GlobalController extends GetxController {
     super.onInit();
   }
 
-  void updateWatchSize(double widthScreen) {
-    _watchSize.value = 1080.0;
-    double maxScreen = 1080;
-    // If widthScreen <       0   : _watchSize = 0;
-    // if widthScreen > maxScreen : _watchSize = maxScreen;
-    _watchSize.value = widthScreen.clamp(0, maxScreen);
+  void updateWatchSize(double widthScreenDevice) {
+    double maxScreen = 1080.0; // 384.0;
+    // If widthScreenDevice <       0   : _watchSize = 0;
+    // If widthScreenDevice > maxScreen : _watchSize = maxScreen;
+    // If 0 <= widthScreenDevice <= maxScreen : _watchSize = widthScreenDevice;
+    _watchSize.value = widthScreenDevice.clamp(0, maxScreen);
   }
 }
