@@ -54,8 +54,7 @@ class BubbleLensState extends State<BubbleLens> {
   void initState() {
     super.initState();
     _middleX = widget.width / 2;
-    _middleY = widget.height / 2 - _middleX;
-    print(_middleY);
+    _middleY = widget.height / 2;
     _offsetX = _middleX - widget.size / 2;
     _offsetY = _middleY - widget.size / 2;
     _lastX = 0;

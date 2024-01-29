@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 
+import 'package:get/get.dart';
+import 'package:watch_launcher/controller.dart';
+
 import '../template/page_template.dart';
 import '../utilts/bubble_len.dart';
 
@@ -22,6 +25,12 @@ class CircleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
+    double widthScreen = MediaQuery.of(context).size.width;
+    double watchSize = (globalController.getWatchSize().value);
+
     return Scaffold(
       body: FutureBuilder<List<Application>>(
         future: apps,
@@ -33,45 +42,57 @@ class CircleApp extends StatelessWidget {
               );
             } else {
               List<Application> installedApps = snapshot.data!;
-              return BubbleLens(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  size: 110,
-                  paddingX: 5,
-                  paddingY: 5,
-                  color: Colors.black,
-                  widgets: installedApps.map((app) {
-                    return GestureDetector(
-                      onTap: () {
-                        _openApp(app);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: Image.asset(
-                              'lib/assets/bg_icon.png', // Replace with the actual path to your image asset
-                            ).image,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Center(
-                          child: Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              image: (app is ApplicationWithIcon)
-                                  ? DecorationImage(
-                                      image: MemoryImage(app.icon),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList());
+              return PageTemplate(
+                child: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: ClipOval(
+                    child: Center(
+                      child: BubbleLens(
+                          width: watchSize,
+                          height: watchSize,
+                          // width: 300,
+                          // height: 300,
+                          size: 110,
+                          paddingX: 5,
+                          paddingY: 5,
+                          color: Colors.green,
+                          widgets: installedApps.map((app) {
+                            return GestureDetector(
+                              onTap: () {
+                                _openApp(app);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: Image.asset(
+                                      'lib/assets/bg_icon.png', // Replace with the actual path to your image asset
+                                    ).image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    width: 70,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                      image: (app is ApplicationWithIcon)
+                                          ? DecorationImage(
+                                              image: MemoryImage(app.icon),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : null,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).toList()),
+                    ),
+                  ),
+                ),
+              );
             }
           } else {
             return const Center(
