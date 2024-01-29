@@ -25,8 +25,8 @@ class BubbleLens extends StatefulWidget {
       this.paddingY = 0,
       this.duration = const Duration(milliseconds: 100),
       this.radius = const Radius.circular(999),
-      this.highRatio = 0,
-      this.lowRatio = 0})
+      this.highRatio = 0.3,
+      this.lowRatio = 0.0})
       : super(key: key);
 
   @override

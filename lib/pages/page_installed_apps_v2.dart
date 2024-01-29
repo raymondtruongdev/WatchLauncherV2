@@ -28,7 +28,6 @@ class CircleApp extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double widthScreen = MediaQuery.of(context).size.width;
     double watchSize = (globalController.getWatchSize().value);
 
     return Scaffold(
@@ -43,54 +42,46 @@ class CircleApp extends StatelessWidget {
             } else {
               List<Application> installedApps = snapshot.data!;
               return PageTemplate(
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: ClipOval(
-                    child: Center(
-                      child: BubbleLens(
-                          width: watchSize,
-                          height: watchSize,
-                          // width: 300,
-                          // height: 300,
-                          size: 110,
-                          paddingX: 5,
-                          paddingY: 5,
-                          color: Colors.green,
-                          widgets: installedApps.map((app) {
-                            return GestureDetector(
-                              onTap: () {
-                                _openApp(app);
-                              },
+                child: Center(
+                  child: BubbleLens(
+                      width: watchSize,
+                      height: watchSize,
+                      size: watchSize * 0.25,
+                      paddingX: watchSize * 0.012,
+                      paddingY: watchSize * 0.01,
+                      color: Colors.black,
+                      widgets: installedApps.map((app) {
+                        return GestureDetector(
+                          onTap: () {
+                            _openApp(app);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: Image.asset(
+                                  'lib/assets/bg_icon.png', // Replace with the actual path to your image asset
+                                ).image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Center(
                               child: Container(
+                                width: watchSize * 0.16,
+                                height: watchSize * 0.16,
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: Image.asset(
-                                      'lib/assets/bg_icon.png', // Replace with the actual path to your image asset
-                                    ).image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Container(
-                                    width: 70,
-                                    height: 70,
-                                    decoration: BoxDecoration(
-                                      image: (app is ApplicationWithIcon)
-                                          ? DecorationImage(
-                                              image: MemoryImage(app.icon),
-                                              fit: BoxFit.cover,
-                                            )
-                                          : null,
-                                    ),
-                                  ),
+                                  image: (app is ApplicationWithIcon)
+                                      ? DecorationImage(
+                                          image: MemoryImage(app.icon),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
                                 ),
                               ),
-                            );
-                          }).toList()),
-                    ),
-                  ),
+                            ),
+                          ),
+                        );
+                      }).toList()),
                 ),
               );
             }
