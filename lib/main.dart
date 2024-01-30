@@ -1,40 +1,37 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/pages/page_installed_apps_v2.dart';
+import 'package:watch_launcher/utilts/get_app.dart';
 
 import 'clock_widget/widget_demo.dart';
-
-import 'pages/page_installed_apps_v2.dart';
 import 'pages/page_watchface.dart';
-
-import 'utilts/get_app.dart';
-
-import 'package:flutter/services.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 Widget pageInstalledApp = PageInstalledAppsV2(apps: apps);
 final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
-
-void main() {
-  // runApp(const MyHomePage());
-
-  // runApp(const MaterialApp(home: MyHomePage()));
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Set the system UI overlays to immersive mode
+    // Set the system UI overlays to FullScreen mode
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
+    // Set watchSize value into Controller
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+    double widthScreenDevice = MediaQuery.of(context).size.width;
+    globalController.updateWatchSize(widthScreenDevice);
+
     return const MaterialApp(
-      // title: 'Full Screen App',
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -15,8 +15,6 @@ class PageTemplate extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double widthScreenDevice = MediaQuery.of(context).size.width;
-    globalController.updateWatchSize(widthScreenDevice);
     double watchSize = (globalController.getWatchSize().value);
 
     return Scaffold(
