@@ -18,7 +18,7 @@ List<Widget> demoWatchFaceList = [
   const WatchFaceAnalog02()
 ];
 
-Widget currentWatchFace = demoWatchFaceList[2];
+Widget currentWatchFace = demoWatchFaceList[1];
 
 class _PageWatchFaceState extends State<PageWatchFace> {
   void updateWatchFace(Widget newWatchface) {

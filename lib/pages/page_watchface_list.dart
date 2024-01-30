@@ -33,9 +33,9 @@ class _PageWatchFaceListState extends State<PageWatchFaceList> {
       WatchFaceSelection(
           mywidget: const WatchFaceDigital01(mycolor: Colors.green),
           onPressed: chosseNewWatchFace),
-      WatchFaceSelection(
-          mywidget: const WatchFaceDigital01(mycolor: Colors.blue),
-          onPressed: chosseNewWatchFace),
+      // WatchFaceSelection(
+      //     mywidget: const WatchFaceDigital01(mycolor: Colors.blue),
+      //     onPressed: chosseNewWatchFace),
       WatchFaceSelection(
           mywidget: const WatchFaceAnalog01(), onPressed: chosseNewWatchFace),
     ];
