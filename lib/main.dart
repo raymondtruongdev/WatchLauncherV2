@@ -66,16 +66,29 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
 
       const PageWatchFace(),
+
       const WidgetTextCircleV2(
-        text: 'PAGE3',
+        text: 'Weather',
         color: Colors.red,
         imageBg: 'lib/assets/tempImages/tempWeather.png',
       ),
       // PageInstalledAppsV2(apps: apps),
       const WidgetTextCircleV2(
-          text: 'PAGE4',
+          // text: 'GoogleMap',
           color: Colors.green,
           imageBg: 'lib/assets/tempImages/tempGoogleMap.png'),
+      const WidgetTextCircleV2(
+          // text: 'Workout',
+          color: Colors.green,
+          imageBg: 'lib/assets/tempImages/tempWorkout.png'),
+      const WidgetTextCircleV2(
+          // text: 'Wellness',
+          color: Colors.green,
+          imageBg: 'lib/assets/tempImages/tempWellness.png'),
+      const WidgetTextCircleV2(
+          // text: 'Music',
+          color: Colors.green,
+          imageBg: 'lib/assets/tempImages/tempMusic.png'),
       WidgetTextButtonCircle(
           text: 'Comming Soon',
           color: Colors.white,

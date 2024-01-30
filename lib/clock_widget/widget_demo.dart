@@ -78,7 +78,7 @@ class WidgetTextCircleV2 extends StatelessWidget {
   final Color color;
   final String imageBg;
   const WidgetTextCircleV2(
-      {Key? key, required this.text, required this.color, this.imageBg = ''})
+      {Key? key, this.text = '', required this.color, this.imageBg = ''})
       : super(key: key);
 
   @override
@@ -105,10 +105,12 @@ class WidgetTextCircleV2 extends StatelessWidget {
                   : null,
             ),
             child: Center(
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.black),
-              ),
+              child: text.isNotEmpty
+                  ? Text(
+                      text,
+                      style: const TextStyle(color: Colors.black),
+                    )
+                  : null,
             ),
           ),
         ),
