@@ -66,11 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
 
       const PageWatchFace(),
-      const WidgetTextCircle(text: 'PAGE3', color: Colors.blueAccent),
+      const WidgetTextCircleV2(
+        text: 'PAGE3',
+        color: Colors.red,
+        imageBg: 'lib/assets/tempImages/tempWeather.png',
+      ),
       // PageInstalledAppsV2(apps: apps),
-      const WidgetTextCircle(text: 'PAGE4', color: Colors.green),
+      const WidgetTextCircleV2(
+          text: 'PAGE4',
+          color: Colors.green,
+          imageBg: 'lib/assets/tempImages/tempGoogleMap.png'),
       WidgetTextButtonCircle(
-          text: 'PAGE5',
+          text: 'Comming Soon',
           color: Colors.white,
           textButton: 'Add Page',
           onPressed: () {

@@ -73,6 +73,50 @@ class WidgetTextCircle extends StatelessWidget {
   }
 }
 
+class WidgetTextCircleV2 extends StatelessWidget {
+  final String text;
+  final Color color;
+  final String imageBg;
+  const WidgetTextCircleV2(
+      {Key? key, required this.text, required this.color, this.imageBg = ''})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // String imageBg = 'lib/assets/tempImages/tempWeather.png';
+
+    return PageTemplate(
+      child: Center(
+        child: ClipOval(
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white,
+                width: 2.0,
+              ),
+              image: imageBg.isNotEmpty
+                  ? DecorationImage(
+                      image: AssetImage(imageBg),
+                      fit: BoxFit.cover,
+                    )
+                  : null,
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class WidgetTextSquare extends StatelessWidget {
   final String text;
   final Color color;
