@@ -29,7 +29,8 @@ class CircleApp extends StatelessWidget {
         Get.put(GlobalController(), permanent: true);
 
     double watchSize = (globalController.getWatchSize().value);
-
+    // We design a watch at 390 resolution, for other screen will be scale to 390
+    double scaleRatio = watchSize / 390;
     return Scaffold(
       body: FutureBuilder<List<Application>>(
         future: apps,
@@ -46,9 +47,9 @@ class CircleApp extends StatelessWidget {
                   child: BubbleLens(
                       width: watchSize,
                       height: watchSize,
-                      size: watchSize * 0.25,
-                      paddingX: watchSize * 0.012,
-                      paddingY: watchSize * 0.01,
+                      size: 100 * scaleRatio,
+                      paddingX: 5 * scaleRatio,
+                      paddingY: 4 * scaleRatio,
                       color: Colors.black,
                       widgets: installedApps.map((app) {
                         return GestureDetector(
@@ -60,15 +61,15 @@ class CircleApp extends StatelessWidget {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: Image.asset(
-                                  'lib/assets/bg_icon.png', // Replace with the actual path to your image asset
+                                  'lib/assets/bg_icon.png',
                                 ).image,
                                 fit: BoxFit.cover,
                               ),
                             ),
                             child: Center(
                               child: Container(
-                                width: watchSize * 0.16,
-                                height: watchSize * 0.16,
+                                width: 55 * scaleRatio,
+                                height: 55 * scaleRatio,
                                 decoration: BoxDecoration(
                                   image: (app is ApplicationWithIcon)
                                       ? DecorationImage(
