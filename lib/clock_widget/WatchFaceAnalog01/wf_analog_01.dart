@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/complication.dart';
-import 'package:watch_launcher/clock_widget/clock_analog_01.dart';
+import 'package:get/get.dart';
+import 'package:watch_launcher/clock_widget/Complication01/complication01.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/clock_analog_01.dart';
+import 'package:watch_launcher/controller.dart';
 
 import '../../template/page_template.dart';
 
@@ -23,39 +25,47 @@ class ClockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
+    double watchSize = (globalController.getWatchSize().value);
+
+    double scaleRatio = watchSize / 390;
+
     var complicationBattery = CircleComplication(
         title: 'Battery',
-        value: '10%',
+        value: '80%',
         percentage: 0.10,
-        radius: 40,
-        icon: Icons.battery_full,
+        radius: 40 * scaleRatio,
+        // icon: Icons.battery_full,
+        imagePath: 'lib/clock_widget/Complication01/image/battery.svg',
+        gaugeColor: GaugeColor(
+            bgColorInside: const Color(0xff0A3E19),
+            bgColorOutside: const Color(0xff146327),
+            bgColorValue: const Color(0xff31F965)));
+
+    var complicationStep = CircleComplication(
+        title: 'Step',
+        value: '5000',
+        percentage: 0.53,
+        radius: 40 * scaleRatio,
+        // icon: Icons.nordic_walking_sharp,
+        imagePath: 'lib/clock_widget/Complication01/image/step.svg',
         gaugeColor: GaugeColor(
             bgColorInside: const Color(0xff012340),
             bgColorOutside: const Color(0xff012340),
             bgColorValue: const Color(0xff028CFF)));
-    var complicationStep = CircleComplication(
-      title: 'Step',
-      value: '5000',
-      percentage: 0.53,
-      radius: 40,
-      icon: Icons.nordic_walking_sharp,
-      gaugeColor: GaugeColor(
-          bgColorInside: const Color(0xff0A3E19),
-          bgColorOutside: const Color(0xff146327),
-          bgColorValue: const Color(0xff31F965)),
-    );
 
     var complicationHr = CircleComplication(
-      title: 'HR',
-      value: '80',
-      percentage: 1.0,
-      radius: 40,
-      icon: Icons.heart_broken,
-      gaugeColor: GaugeColor(
-          bgColorInside: const Color.fromARGB(255, 245, 136, 136),
-          bgColorOutside: const Color.fromARGB(255, 185, 52, 52),
-          bgColorValue: const Color.fromARGB(255, 245, 136, 136)),
-    );
+        title: 'HR',
+        value: '80',
+        percentage: 1.0,
+        radius: 40 * scaleRatio,
+        imagePath: 'lib/clock_widget/Complication01/image/heartrate.svg',
+        gaugeColor: GaugeColor(
+            bgColorInside: const Color(0xffF58988),
+            bgColorOutside: const Color(0xffB93534),
+            bgColorValue: const Color(0xffF58988)));
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -66,7 +76,8 @@ class ClockScreen extends StatelessWidget {
             height: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('lib/assets/wf_bg_01.png'),
+                image: AssetImage(
+                    'lib/clock_widget/WatchFaceAnalog01/image/background.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,17 +86,20 @@ class ClockScreen extends StatelessWidget {
               // Image.asset('assets/wf_bg_01.png'), // Clock face image
               Transform(
                 alignment: Alignment.center,
-                transform: Matrix4.identity()..translate(0.0, 80.0),
+                transform: Matrix4.identity()
+                  ..translate(0.0, 80.0 * scaleRatio),
                 child: complicationBattery, // Clock hand image
               ),
               Transform(
                 alignment: Alignment.center,
-                transform: Matrix4.identity()..translate(-80.0, 0.0),
+                transform: Matrix4.identity()
+                  ..translate(-80.0 * scaleRatio, 0.0),
                 child: complicationStep, // Clock hand image
               ),
               Transform(
                 alignment: Alignment.center,
-                transform: Matrix4.identity()..translate(80.0, 0.0),
+                transform: Matrix4.identity()
+                  ..translate(80.0 * scaleRatio, 0.0),
                 child: complicationHr, // Clock hand image
               ),
               const ClockAnalog01(),

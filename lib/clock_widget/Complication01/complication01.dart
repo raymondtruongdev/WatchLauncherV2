@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 // This class use to make a CircleComplication with Gauge Circle
 /* Example:
 var complicationBattery = CircleComplication(
@@ -31,7 +32,7 @@ class CircleComplication extends StatelessWidget {
   final double radius;
   final String title;
   final String value;
-  final IconData icon;
+  final String imagePath;
   final GaugeColor gaugeColor;
 
   const CircleComplication({
@@ -40,7 +41,7 @@ class CircleComplication extends StatelessWidget {
     required this.title,
     required this.value,
     required this.radius,
-    required this.icon,
+    required this.imagePath,
     required this.gaugeColor,
   }) : super(key: key);
 
@@ -75,9 +76,21 @@ class CircleComplication extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(icon,
-                      size: fontSizeContent * 2.5,
-                      color: gaugeColor.bgColorValue),
+                  // Icon(icon,
+                  //     size: fontSizeContent * 2.5,
+                  //     color: gaugeColor.bgColorValue),
+                  SizedBox(
+                    width: radius / 2,
+                    height: radius / 2,
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //     image: AssetImage(image),
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    // ),
+                    child: SvgPicture.asset(imagePath),
+                  ),
+
                   Text(title),
                 ],
               ),

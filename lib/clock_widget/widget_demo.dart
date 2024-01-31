@@ -94,8 +94,8 @@ class WidgetTextCircleV2 extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white,
-                width: 2.0,
+                color: Colors.black,
+                width: 1.0,
               ),
               image: imageBg.isNotEmpty
                   ? DecorationImage(

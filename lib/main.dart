@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       const WidgetTextCircleV2(
           // text: 'Workout',
           color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempWorkout.png'),
+          imageBg: 'lib/assets/tempImages/tempLiveWorkout.png'),
       const WidgetTextCircleV2(
           // text: 'Wellness',
           color: Colors.green,
