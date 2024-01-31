@@ -48,6 +48,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.6
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -76,7 +77,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - lib/assets/
+    - lib/clock_widget/WatchFaceAnalog01/image/
     - lib/clock_widget/WatchFaceAnalog02/image/
+    - lib/clock_widget/Complication01/image/
     - lib/assets/tempImages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
