@@ -5,6 +5,7 @@ import 'package:loop_page_view/loop_page_view.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/wf_analog_01.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceAnalog02/wf_analog_02.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceDigital01/wf_digital_01.dart';
+import 'package:watch_launcher/clock_widget/WatchFaceDigital02/wf_digital_02.dart';
 import 'package:watch_launcher/clock_widget/watchface_selection.dart';
 
 class PageWatchFaceList extends StatefulWidget {
@@ -31,7 +32,7 @@ class _PageWatchFaceListState extends State<PageWatchFaceList> {
       WatchFaceSelection(
           mywidget: const WatchFaceAnalog02(), onPressed: chosseNewWatchFace),
       WatchFaceSelection(
-          mywidget: const WatchFaceDigital01(mycolor: Colors.green),
+          mywidget: const WatchFaceDigital02(mycolor: Colors.green),
           onPressed: chosseNewWatchFace),
       // WatchFaceSelection(
       //     mywidget: const WatchFaceDigital01(mycolor: Colors.blue),

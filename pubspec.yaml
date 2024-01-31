@@ -80,6 +80,7 @@ flutter:
     - lib/clock_widget/WatchFaceAnalog01/image/
     - lib/clock_widget/WatchFaceAnalog02/image/
     - lib/clock_widget/Complication01/image/
+    - lib/clock_widget/WatchFaceDigital02/image/
     - lib/assets/tempImages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
