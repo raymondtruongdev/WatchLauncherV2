@@ -63,9 +63,9 @@ class ClockScreen extends StatelessWidget {
         radius: 40 * scaleRatio,
         imagePath: 'lib/clock_widget/Complication01/image/heartrate.svg',
         gaugeColor: GaugeColor(
-            bgColorInside: const Color(0xffF58988),
-            bgColorOutside: const Color(0xffB93534),
-            bgColorValue: const Color(0xffF58988)));
+            bgColorInside: const Color(0xff373740),
+            bgColorOutside: const Color(0xff888760),
+            bgColorValue: const Color(0xffFFE61E)));
 
     return Scaffold(
       backgroundColor: Colors.black,
