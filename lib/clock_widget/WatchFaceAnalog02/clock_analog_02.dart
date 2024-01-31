@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
 
 class ClockAnalog02 extends StatefulWidget {
   const ClockAnalog02({super.key});

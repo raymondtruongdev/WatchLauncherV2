@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
 
 class PageTemplate extends StatelessWidget {
   final Widget child;

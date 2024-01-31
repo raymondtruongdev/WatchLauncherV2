@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
 
 import '../../template/page_template.dart';
 

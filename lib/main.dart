@@ -2,10 +2,10 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
+import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
 import 'package:watch_launcher/pages/page_installed_apps_v2.dart';
 import 'package:watch_launcher/utilts/get_app.dart';
-
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_watchface.dart';
 
@@ -28,6 +28,10 @@ class MyApp extends StatelessWidget {
         Get.put(GlobalController(), permanent: true);
     double widthScreenDevice = MediaQuery.of(context).size.width;
     globalController.updateWatchSize(widthScreenDevice);
+
+    globalController.setWatchFaceList(createWatchFaceList());
+    // Set Index of Watch Face to show
+    globalController.setIndexWatchFace(0);
 
     return const MaterialApp(
       home: MyHomePage(),
@@ -54,13 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // Make inital page list
     pages = [
       // const WidgetTextCircle(text: 'PAGE1', color: Colors.green),
-      WidgetTextButtonCircle(
-          text: 'PAGE1',
-          color: Colors.white,
-          textButton: 'OPEN APP PAGE',
-          onPressed: () {
-            openAppPage();
-          }),
+      // WidgetTextButtonCircle(
+      //     text: 'PAGE1',
+      //     color: Colors.white,
+      //     textButton: 'OPEN APP PAGE',
+      //     onPressed: () {
+      //       openAppPage();
+      //     }),
+
+      PageInstalledAppsV2(apps: apps),
 
       const PageWatchFace(),
 
@@ -69,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Colors.red,
         imageBg: 'lib/assets/tempImages/tempWeather.png',
       ),
-      // PageInstalledAppsV2(apps: apps),
+
       const WidgetTextCircleV2(
           // text: 'GoogleMap',
           color: Colors.green,

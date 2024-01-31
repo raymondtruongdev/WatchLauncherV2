@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/template/page_template.dart';
 
 class WatchFaceSelection extends StatefulWidget {
   final Widget mywidget;
-  final Function onPressed;
+  final int idWatch;
 
   const WatchFaceSelection({
     Key? key,
     required this.mywidget,
-    required this.onPressed,
+    required this.idWatch,
   }) : super(key: key);
 
   @override
@@ -18,6 +20,9 @@ class WatchFaceSelection extends StatefulWidget {
 class _WatchFaceSelectionState extends State<WatchFaceSelection> {
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
     return PageTemplate(
       child: Center(
         child: Stack(
@@ -35,7 +40,10 @@ class _WatchFaceSelectionState extends State<WatchFaceSelection> {
                 height: 30,
                 child: ElevatedButton(
                   onPressed: () {
-                    widget.onPressed(widget.mywidget);
+                    // Update new watchface index
+                    globalController.setIndexWatchFace(widget.idWatch);
+                    // Back to watchface page
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     'Select',

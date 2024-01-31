@@ -3,7 +3,7 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 
 import 'package:get/get.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
 
 import '../template/page_template.dart';
 import '../utilts/bubble_len.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/clock_widget/Complication01/complication01.dart';
 import 'package:watch_launcher/clock_widget/WatchFaceAnalog01/clock_analog_01.dart';
-import 'package:watch_launcher/controller.dart';
+import 'package:watch_launcher/controller/controller.dart';
 
 import '../../template/page_template.dart';
 
