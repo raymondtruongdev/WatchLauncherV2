@@ -23,9 +23,7 @@ class PageWatchFace extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PageWatchFaceSelection(
-                  updateWatchFace: globalController.setIndexWatchFace,
-                ),
+                builder: (context) => const PageWatchFaceSelection(),
               ),
             );
           },

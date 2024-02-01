@@ -7,10 +7,7 @@ import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/template/page_template.dart';
 
 class PageWatchFaceSelection extends StatefulWidget {
-  final Function updateWatchFace;
-
-  const PageWatchFaceSelection({Key? key, required this.updateWatchFace})
-      : super(key: key);
+  const PageWatchFaceSelection({Key? key}) : super(key: key);
 
   @override
   _PageWatchFaceSelectionState createState() => _PageWatchFaceSelectionState();
@@ -22,12 +19,6 @@ class _PageWatchFaceSelectionState extends State<PageWatchFaceSelection> {
   @override
   void initState() {
     super.initState();
-  }
-
-  void chosseNewWatchFace(Widget newWatchface) {
-    setState(() {
-      widget.updateWatchFace(newWatchface);
-    });
   }
 
   @override
