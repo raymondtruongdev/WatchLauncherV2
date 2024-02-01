@@ -45,6 +45,7 @@ class CircleApp extends StatelessWidget {
               return InteractiveViewer(
                 minScale: 1,
                 maxScale: 3,
+                panEnabled: false,
                 child: PageTemplate(
                   child: Center(
                     child: BubbleLens(

@@ -11,7 +11,7 @@ import 'pages/page_watchface.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 Widget pageInstalledApp = PageInstalledApps(apps: apps);
-final PageController _pageController = PageController(initialPage: 0);
+final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
 void main() => runApp(const MyApp());
 
@@ -68,6 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // PageInstalledApps(apps: apps),
 
+      const WidgetTextCircleV2(
+          // text: 'Wellness',
+          color: Colors.green,
+          imageBg: 'lib/assets/tempImages/tempWellness.png'),
+
       const PageWatchFace(),
 
       const WidgetTextCircleV2(
@@ -84,10 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // text: 'Workout',
           color: Colors.green,
           imageBg: 'lib/assets/tempImages/tempLiveWorkout.png'),
-      const WidgetTextCircleV2(
-          // text: 'Wellness',
-          color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempWellness.png'),
+
       const WidgetTextCircleV2(
           // text: 'Music',
           color: Colors.green,
@@ -126,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onWillPop: () async {
           // Handle the back button press
           final int currentPage = _pageController.page!.round();
-          if (currentPage == 0) {
+          if (currentPage == 1) {
             openAppPage();
             return false; // Do not allow the system to pop the page
           }
