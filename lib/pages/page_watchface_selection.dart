@@ -6,21 +6,8 @@ import 'package:loop_page_view/loop_page_view.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/template/page_template.dart';
 
-class PageWatchFaceSelection extends StatefulWidget {
+class PageWatchFaceSelection extends StatelessWidget {
   const PageWatchFaceSelection({Key? key}) : super(key: key);
-
-  @override
-  _PageWatchFaceSelectionState createState() => _PageWatchFaceSelectionState();
-}
-
-class _PageWatchFaceSelectionState extends State<PageWatchFaceSelection> {
-  List<Widget> pages = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final GlobalController globalController =
@@ -56,7 +43,7 @@ List<Widget> createWatchFaceSelection(List<Widget> watchFaceList) {
   return pages;
 }
 
-class WatchFaceSelection extends StatefulWidget {
+class WatchFaceSelection extends StatelessWidget {
   final Widget mywidget;
   final int idWatch;
 
@@ -66,11 +53,6 @@ class WatchFaceSelection extends StatefulWidget {
     required this.idWatch,
   }) : super(key: key);
 
-  @override
-  State<WatchFaceSelection> createState() => _WatchFaceSelectionState();
-}
-
-class _WatchFaceSelectionState extends State<WatchFaceSelection> {
   @override
   Widget build(BuildContext context) {
     final GlobalController globalController =
@@ -83,7 +65,7 @@ class _WatchFaceSelectionState extends State<WatchFaceSelection> {
             Transform.scale(
               scale: 0.8,
               alignment: Alignment.center,
-              child: widget.mywidget,
+              child: mywidget,
             ),
             Container(
               alignment: Alignment.bottomCenter,
@@ -94,7 +76,7 @@ class _WatchFaceSelectionState extends State<WatchFaceSelection> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Update new watchface index
-                    globalController.setIndexWatchFace(widget.idWatch);
+                    globalController.setIndexWatchFace(idWatch);
                     // Back to watchface page
                     Navigator.pop(context);
                   },
