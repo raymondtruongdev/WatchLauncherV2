@@ -58,36 +58,24 @@ class WatchFaceSelection extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    return PageTemplate(
-      child: Center(
-        child: Stack(
-          children: [
-            Transform.scale(
-              scale: 0.8,
-              alignment: Alignment.center,
-              child: mywidget,
-            ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              margin: const EdgeInsets.only(bottom: 70),
-              child: SizedBox(
-                width: 110,
-                height: 30,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Update new watchface index
-                    globalController.setIndexWatchFace(idWatch);
-                    // Back to watchface page
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'Select',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                ),
+    return GestureDetector(
+      onTap: () {
+        // Update new watchface index
+        globalController.setIndexWatchFace(idWatch);
+        // Back to watchface page
+        Navigator.pop(context);
+      },
+      child: PageTemplate(
+        child: Center(
+          child: Stack(
+            children: [
+              Transform.scale(
+                scale: 0.8,
+                alignment: Alignment.center,
+                child: mywidget,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
