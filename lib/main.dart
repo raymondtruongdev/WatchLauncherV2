@@ -11,7 +11,7 @@ import 'pages/page_watchface.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
 Widget pageInstalledApp = PageInstalledApps(apps: apps);
-final PageController _pageController = PageController(initialPage: 1);
+final PageController _pageController = PageController(initialPage: 0);
 List<Widget> pages = [];
 void main() => runApp(const MyApp());
 
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //       openAppPage();
       //     }),
 
-      PageInstalledApps(apps: apps),
+      // PageInstalledApps(apps: apps),
 
       const PageWatchFace(),
 
@@ -126,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onWillPop: () async {
           // Handle the back button press
           final int currentPage = _pageController.page!.round();
-          if (currentPage == 1) {
+          if (currentPage == 0) {
             openAppPage();
             return false; // Do not allow the system to pop the page
           }
