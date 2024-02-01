@@ -4,6 +4,7 @@ import 'package:device_apps/device_apps.dart';
 
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
+import 'package:watch_launcher/utilts/bubble_len_v2.dart';
 
 import '../template/page_template.dart';
 import '../utilts/bubble_len.dart';
@@ -44,7 +45,7 @@ class CircleApp extends StatelessWidget {
               List<Application> installedApps = snapshot.data!;
               return PageTemplate(
                 child: Center(
-                  child: BubbleLens(
+                  child: BubbleLensV2(
                       width: watchSize,
                       height: watchSize,
                       size: 100 * scaleRatio,
