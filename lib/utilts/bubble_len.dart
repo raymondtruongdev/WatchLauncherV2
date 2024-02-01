@@ -95,7 +95,7 @@ class BubbleLensState extends State<BubbleLens> {
       height: widget.height,
       color: widget.color,
       child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+        // behavior: HitTestBehavior.opaque,
         onPanUpdate: (details) {
           double newOffsetX =
               max(_minLeft, min(_maxLeft, _offsetX + details.delta.dx));

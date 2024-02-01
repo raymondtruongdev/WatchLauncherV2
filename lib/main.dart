@@ -4,13 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
-import 'package:watch_launcher/pages/page_installed_apps_v2.dart';
+import 'package:watch_launcher/pages/page_installed_apps.dart';
 import 'package:watch_launcher/utilts/get_app.dart';
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_watchface.dart';
 
 Future<List<Application>> apps = GetApp.getInstalledApplications();
-Widget pageInstalledApp = PageInstalledAppsV2(apps: apps);
+Widget pageInstalledApp = PageInstalledApps(apps: apps);
 final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
 void main() => runApp(const MyApp());
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //       openAppPage();
       //     }),
 
-      PageInstalledAppsV2(apps: apps),
+      PageInstalledApps(apps: apps),
 
       const PageWatchFace(),
 

@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 
+import 'package:get/get.dart';
+import 'package:watch_launcher/controller/controller.dart';
+
 import '../template/page_template.dart';
+import '../utilts/bubble_len.dart';
 
 class PageInstalledApps extends StatelessWidget {
   final Future<List<Application>> apps;
@@ -10,7 +14,7 @@ class PageInstalledApps extends StatelessWidget {
   const PageInstalledApps({Key? key, required this.apps}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(child: CircleApp(apps: apps));
+    return PageTemplate(color: Colors.white, child: CircleApp(apps: apps));
   }
 }
 
@@ -21,6 +25,12 @@ class CircleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
+    double watchSize = (globalController.getWatchSize().value);
+    // We design a watch at 390 resolution, for other screen will be scale to 390
+    double scaleRatio = watchSize / 390;
     return Scaffold(
       body: FutureBuilder<List<Application>>(
         future: apps,
@@ -32,40 +42,50 @@ class CircleApp extends StatelessWidget {
               );
             } else {
               List<Application> installedApps = snapshot.data!;
-              return Center(
-                child: ClipOval(
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    alignment: Alignment.topLeft,
-                    // padding: const EdgeInsets.only(left: 8),
-                    decoration: const BoxDecoration(color: Colors.green),
-                    child: ListView.builder(
-                      itemCount: installedApps.length,
-                      itemBuilder: (context, index) {
-                        Application app = installedApps[index];
-                        return Container(
-                          // height: 60,
-                          padding: const EdgeInsets.only(left: 20),
-                          margin: const EdgeInsets.only(bottom: 20),
-                          decoration: const BoxDecoration(color: Colors.green),
-                          // color: Colors.amber,
-                          child: ListTile(
-                            leading: app is ApplicationWithIcon
-                                ? CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage: MemoryImage(app.icon),
-                                  )
-                                : null,
-                            title: Text(app.appName,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            // subtitle: Text('Package: ${app.packageName}'),
-                            onTap: () => _openApp(app),
-                          ),
-                        );
-                      },
-                    ),
+              return InteractiveViewer(
+                minScale: 1,
+                maxScale: 3,
+                child: PageTemplate(
+                  child: Center(
+                    child: BubbleLens(
+                        width: watchSize,
+                        height: watchSize,
+                        size: 100 * scaleRatio,
+                        paddingX: 5 * scaleRatio,
+                        paddingY: 4 * scaleRatio,
+                        color: Colors.black,
+                        widgets: installedApps.map((app) {
+                          return GestureDetector(
+                            onTap: () {
+                              _openApp(app);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: Image.asset(
+                                    'lib/assets/bg_icon.png',
+                                  ).image,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              child: Center(
+                                child: Container(
+                                  width: 55 * scaleRatio,
+                                  height: 55 * scaleRatio,
+                                  decoration: BoxDecoration(
+                                    image: (app is ApplicationWithIcon)
+                                        ? DecorationImage(
+                                            image: MemoryImage(app.icon),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : null,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList()),
                   ),
                 ),
               );
@@ -79,12 +99,12 @@ class CircleApp extends StatelessWidget {
       ),
     );
   }
-}
 
-Future<void> _openApp(Application app) async {
-  AndroidIntent intent = AndroidIntent(
-    action: 'android.intent.action.MAIN',
-    package: app.packageName,
-  );
-  await intent.launch();
+  Future<void> _openApp(Application app) async {
+    AndroidIntent intent = AndroidIntent(
+      action: 'android.intent.action.MAIN',
+      package: app.packageName,
+    );
+    await intent.launch();
+  }
 }
