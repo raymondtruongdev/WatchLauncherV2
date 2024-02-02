@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:watch_launcher/controller/controller.dart';
 import '../../template/page_template.dart';
 import 'clock_analog_02.dart';
 
@@ -22,6 +24,13 @@ class ClockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
+    double watchSize = (globalController.getWatchSize().value);
+
+    double scaleRatio = watchSize / 390;
+
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('EEE | dd').format(now);
     return Scaffold(
@@ -45,12 +54,13 @@ class ClockScreen extends StatelessWidget {
                         Stack(alignment: Alignment.center, children: <Widget>[
                   Transform(
                     alignment: Alignment.center,
-                    transform: Matrix4.identity()..translate(80.0, 2.0),
+                    transform: Matrix4.identity()
+                      ..translate(80.0 * scaleRatio, 2.0 * scaleRatio),
                     child: Text(formattedDate,
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Imprima',
-                            fontSize: 20)), // Clock hand image
+                            fontSize: 20 * scaleRatio)), // Clock hand image
                   ),
                   const ClockAnalog02(),
                 ])),
