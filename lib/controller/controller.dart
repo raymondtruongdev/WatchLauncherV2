@@ -5,16 +5,22 @@ class GlobalController extends GetxController {
   final RxDouble _watchSize = 0.0.obs;
   final RxInt _indexWatchFace = 0.obs;
   late List<Widget> _watchFaceList = [];
+  late Widget pageInstalledApp;
 
   RxDouble getWatchSize() => _watchSize;
   RxInt getIndexWatchFace() => _indexWatchFace;
   List<Widget> getWatchFaceList() => _watchFaceList;
+  Widget getPageInstallApp() => pageInstalledApp;
 
   @override
   void onInit() {
     _watchSize.value = 1080.0;
 
     super.onInit();
+  }
+
+  void setPageInstalledApp(Widget newpage) {
+    pageInstalledApp = newpage;
   }
 
   void setIndexWatchFace(int newIndexWatchFace) {
