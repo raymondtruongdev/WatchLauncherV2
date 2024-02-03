@@ -86,6 +86,18 @@ class BubbleLensState extends State<BubbleLens> {
     super.dispose();
   }
 
+  void updateBubbleOffset(var details) {
+    double newOffsetX =
+        max(_minLeft, min(_maxLeft, _offsetX + details.delta.dx));
+    double newOffsetY = max(_minTop, min(_maxTop, _offsetY + details.delta.dy));
+    if (newOffsetX != _offsetX || newOffsetY != _offsetY) {
+      setState(() {
+        _offsetX = newOffsetX;
+        _offsetY = newOffsetY;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _counter = 0;
@@ -97,16 +109,7 @@ class BubbleLensState extends State<BubbleLens> {
       child: GestureDetector(
         // behavior: HitTestBehavior.opaque,
         onPanUpdate: (details) {
-          double newOffsetX =
-              max(_minLeft, min(_maxLeft, _offsetX + details.delta.dx));
-          double newOffsetY =
-              max(_minTop, min(_maxTop, _offsetY + details.delta.dy));
-          if (newOffsetX != _offsetX || newOffsetY != _offsetY) {
-            setState(() {
-              _offsetX = newOffsetX;
-              _offsetY = newOffsetY;
-            });
-          }
+          updateBubbleOffset(details);
         },
         child: Stack(
             children: widget.widgets.map((item) {
