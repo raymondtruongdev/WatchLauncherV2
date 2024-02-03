@@ -98,6 +98,15 @@ class BubbleLensState extends State<BubbleLens> {
     }
   }
 
+  double _touchCount = 0;
+  void _incrementEnter(PointerEvent details) {
+    _touchCount++;
+  }
+
+  void _incrementExit(PointerEvent details) {
+    _touchCount--;
+  }
+
   @override
   Widget build(BuildContext context) {
     _counter = 0;
@@ -106,72 +115,85 @@ class BubbleLensState extends State<BubbleLens> {
       width: widget.width,
       height: widget.height,
       color: widget.color,
-      child: GestureDetector(
-        // behavior: HitTestBehavior.opaque,
-        onPanUpdate: (details) {
-          updateBubbleOffset(details);
-        },
-        child: Stack(
-            children: widget.widgets.map((item) {
-          int index = widget.widgets.indexOf(item);
-          double left;
-          double top;
-          if (index == 0) {
-            left = _offsetX;
-            top = _offsetY;
-          } else if (index - 1 == _total) {
-            left = (_counter + 1) * (widget.size + widget.paddingX) + _offsetX;
-            top = _offsetY;
-            _lastTotal = _total;
-            _counter++;
-            _total += _counter * 6;
-          } else {
-            List step = _steps[
-                ((index - _lastTotal - 2) / _counter % _steps.length).floor()];
-            left = _lastX + step[0];
-            top = _lastY + step[1];
+      child: Listener(
+        onPointerDown: _incrementEnter,
+        onPointerUp: _incrementExit,
+        onPointerMove: (details) {
+          // Move bubble cloud when there is only one finger on the screen
+          if (_touchCount == 1) {
+            updateBubbleOffset(details);
           }
-          _minLeft =
-              min(_minLeft, -(left - _offsetX) + _middleX - (widget.size / 2));
-          _maxLeft =
-              max(_maxLeft, left - _offsetX + _middleX - (widget.size / 2));
-          _minTop =
-              min(_minTop, -(top - _offsetY) + _middleY - (widget.size / 2));
-          _maxTop = max(_maxTop, top - _offsetY + _middleY - (widget.size / 2));
-          _lastX = left;
-          _lastY = top;
-          double distance = sqrt(pow(_middleX - (left + widget.size / 2), 2) +
-              pow(_middleY - (top + widget.size / 2), 2));
-          double size = widget.size / max(distance / widget.size, 1);
-          double scale = max(
-              0,
-              min(
-                  1,
-                  (size /
-                          widget.size *
-                          (1 + widget.highRatio + widget.lowRatio)) -
-                      widget.lowRatio));
-          return AnimatedPositioned(
-              duration: widget.duration,
-              top: top,
-              left: left,
-              child: Container(
-                  alignment: Alignment.center,
-                  width: widget.size,
-                  height: widget.size,
-                  child: Transform.scale(
-                    scale: scale,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(widget.radius),
-                      child: SizedBox(
-                        width: widget.size,
-                        height: widget.size,
-                        child: item,
+        },
+        child: InteractiveViewer(
+          minScale: 1,
+          maxScale: 3,
+          panEnabled: false,
+          child: Stack(
+              children: widget.widgets.map((item) {
+            int index = widget.widgets.indexOf(item);
+            double left;
+            double top;
+            if (index == 0) {
+              left = _offsetX;
+              top = _offsetY;
+            } else if (index - 1 == _total) {
+              left =
+                  (_counter + 1) * (widget.size + widget.paddingX) + _offsetX;
+              top = _offsetY;
+              _lastTotal = _total;
+              _counter++;
+              _total += _counter * 6;
+            } else {
+              List step = _steps[
+                  ((index - _lastTotal - 2) / _counter % _steps.length)
+                      .floor()];
+              left = _lastX + step[0];
+              top = _lastY + step[1];
+            }
+            _minLeft = min(
+                _minLeft, -(left - _offsetX) + _middleX - (widget.size / 2));
+            _maxLeft =
+                max(_maxLeft, left - _offsetX + _middleX - (widget.size / 2));
+            _minTop =
+                min(_minTop, -(top - _offsetY) + _middleY - (widget.size / 2));
+            _maxTop =
+                max(_maxTop, top - _offsetY + _middleY - (widget.size / 2));
+            _lastX = left;
+            _lastY = top;
+            double distance = sqrt(pow(_middleX - (left + widget.size / 2), 2) +
+                pow(_middleY - (top + widget.size / 2), 2));
+            double size = widget.size / max(distance / widget.size, 1);
+            double scale = max(
+                0,
+                min(
+                    1,
+                    (size /
+                            widget.size *
+                            (1 + widget.highRatio + widget.lowRatio)) -
+                        widget.lowRatio));
+            return AnimatedPositioned(
+                duration: widget.duration,
+                top: top,
+                left: left,
+                child: Container(
+                    alignment: Alignment.center,
+                    width: widget.size,
+                    height: widget.size,
+                    child: Transform.scale(
+                      scale: scale,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(widget.radius),
+                        child: SizedBox(
+                          width: widget.size,
+                          height: widget.size,
+                          child: item,
+                        ),
                       ),
-                    ),
-                  )));
-        }).toList()),
+                    )));
+          }).toList()),
+        ),
       ),
+      // ),
     );
   }
 }

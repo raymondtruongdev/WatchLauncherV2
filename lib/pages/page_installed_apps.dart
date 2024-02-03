@@ -42,52 +42,47 @@ class CircleApp extends StatelessWidget {
               );
             } else {
               List<Application> installedApps = snapshot.data!;
-              return InteractiveViewer(
-                minScale: 1,
-                maxScale: 3,
-                panEnabled: false,
-                child: PageTemplate(
-                  child: Center(
-                    child: BubbleLens(
-                        width: watchSize,
-                        height: watchSize,
-                        size: 100 * scaleRatio,
-                        paddingX: 5 * scaleRatio,
-                        paddingY: 4 * scaleRatio,
-                        color: Colors.black,
-                        widgets: installedApps.map((app) {
-                          return GestureDetector(
-                            onTap: () {
-                              _openApp(app);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: Image.asset(
-                                    'lib/assets/bg_icon.png',
-                                  ).image,
-                                  fit: BoxFit.cover,
-                                ),
+              return PageTemplate(
+                child: Center(
+                  child: BubbleLens(
+                      width: watchSize,
+                      height: watchSize,
+                      size: 100 * scaleRatio,
+                      paddingX: 5 * scaleRatio,
+                      paddingY: 4 * scaleRatio,
+                      color: Colors.black,
+                      widgets: installedApps.map((app) {
+                        return GestureDetector(
+                          onTap: () {
+                            _openApp(app);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: Image.asset(
+                                  'lib/assets/bg_icon.png',
+                                ).image,
+                                fit: BoxFit.cover,
                               ),
-                              child: Center(
-                                child: Container(
-                                  width: 55 * scaleRatio,
-                                  height: 55 * scaleRatio,
-                                  decoration: BoxDecoration(
-                                    image: (app is ApplicationWithIcon)
-                                        ? DecorationImage(
-                                            image: MemoryImage(app.icon),
-                                            fit: BoxFit.cover,
-                                          )
-                                        : null,
-                                  ),
+                            ),
+                            child: Center(
+                              child: Container(
+                                width: 55 * scaleRatio,
+                                height: 55 * scaleRatio,
+                                decoration: BoxDecoration(
+                                  image: (app is ApplicationWithIcon)
+                                      ? DecorationImage(
+                                          image: MemoryImage(app.icon),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
                                 ),
                               ),
                             ),
-                          );
-                        }).toList()),
-                  ),
+                          ),
+                        );
+                      }).toList()),
                 ),
               );
             }
