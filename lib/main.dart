@@ -9,8 +9,6 @@ import 'package:watch_launcher/utilts/get_app.dart';
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_watchface.dart';
 
-Future<List<Application>> apps = GetApp.getInstalledApplications();
-Widget pageInstalledApp = PageInstalledApps(apps: apps);
 final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
 void main() => runApp(const MyApp());
@@ -32,6 +30,12 @@ class MyApp extends StatelessWidget {
     globalController.setWatchFaceList(createWatchFaceList());
     // Set Index of Watch Face to show
     globalController.setIndexWatchFace(0);
+
+    // Set page Installed Apps
+    Future<List<Application>> appsApplication =
+        GetApp.getInstalledApplications();
+    globalController
+        .setPageInstalledApp(PageInstalledApps(apps: appsApplication));
 
     return const MaterialApp(
       home: MyHomePage(),
@@ -104,11 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
-  void openAppPage() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => pageInstalledApp));
-  }
-
   void addNewPage() {
     // Add new page into pages list
     setState(() {
@@ -123,6 +122,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalController globalController =
+        Get.put(GlobalController(), permanent: true);
+
+    void openAppPage() {
+      Navigator.push(
+          // context, MaterialPageRoute(builder: (context) => pageInstalledApp));
+          context,
+          MaterialPageRoute(
+              builder: (context) => globalController.getPageInstallApp()));
+    }
+
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
