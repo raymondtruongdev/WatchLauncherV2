@@ -1,5 +1,5 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 
 import 'package:get/get.dart';
@@ -97,10 +97,18 @@ class CircleApp extends StatelessWidget {
   }
 
   Future<void> _openApp(Application app) async {
-    AndroidIntent intent = AndroidIntent(
-      action: 'android.intent.action.MAIN',
-      package: app.packageName,
+    await LaunchApp.openApp(
+      androidPackageName: 'aa', //app.packageName,
+      iosUrlScheme: '//',
+      appStoreLink:
+          ('https://play.google.com/store/apps/details?id=${app.packageName}&hl=en&gl=US'),
     );
-    await intent.launch();
+
+    // print(' apkFilePath: ${app.apkFilePath}');
+    // print(' appName: ${app.appName}');
+    // print(' category_name: ${app.category.name}');
+    // print(' packageName: ${app.packageName}');
+    // print(' dataDir: ${app.dataDir}');
+    // print(' enabled: ${app.enabled}');
   }
 }

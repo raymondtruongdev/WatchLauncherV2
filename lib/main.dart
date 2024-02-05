@@ -80,13 +80,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // text: 'Music',
           color: Colors.green,
           imageBg: 'lib/assets/tempImages/tempMusic.png'),
-      WidgetTextButtonCircle(
-          text: 'Comming Soon',
-          color: Colors.white,
-          textButton: 'Add Page',
-          onPressed: () {
-            addNewPage();
-          }),
+      // WidgetTextButtonCircle(
+      //     text: 'Comming Soon',
+      //     color: Colors.white,
+      //     textButton: 'Add Page',
+      //     onPressed: () {
+      //       addNewPage();
+      //     }),
     ];
   }
 
