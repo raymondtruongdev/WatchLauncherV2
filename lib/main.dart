@@ -1,11 +1,9 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
 import 'package:watch_launcher/pages/page_installed_apps.dart';
-import 'package:watch_launcher/utilts/get_app.dart';
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_watchface.dart';
 
@@ -21,21 +19,20 @@ class MyApp extends StatelessWidget {
     // Set the system UI overlays to FullScreen mode
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    // Set watchSize value into Controller
+    // Use Controller to observer
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
+
+    // Set value of Watch Size to Controller
     double widthScreenDevice = MediaQuery.of(context).size.width;
     globalController.updateWatchSize(widthScreenDevice);
-
+    // Set the list of Watch Faces to controller
     globalController.setWatchFaceList(createWatchFaceList());
     // Set Index of Watch Face to show
     globalController.setIndexWatchFace(0);
-
     // Set page Installed Apps
-    Future<List<Application>> appsApplication =
-        GetApp.getInstalledApplications();
-    globalController
-        .setPageInstalledApp(PageInstalledApps(apps: appsApplication));
+    globalController.setPageInstalledApp(
+        PageInstalledApps(apps: globalController.getInstalledAppList()));
 
     return const MaterialApp(
       home: MyHomePage(),
@@ -61,30 +58,16 @@ class _MyHomePageState extends State<MyHomePage> {
   void createPages() {
     // Make inital page list
     pages = [
-      // const WidgetTextCircle(text: 'PAGE1', color: Colors.green),
-      // WidgetTextButtonCircle(
-      //     text: 'PAGE1',
-      //     color: Colors.white,
-      //     textButton: 'OPEN APP PAGE',
-      //     onPressed: () {
-      //       openAppPage();
-      //     }),
-
-      // PageInstalledApps(apps: apps),
-
       const WidgetTextCircleV2(
           // text: 'Wellness',
           color: Colors.green,
           imageBg: 'lib/assets/tempImages/tempWellness.png'),
-
       const PageWatchFace(),
-
       const WidgetTextCircleV2(
         text: 'Weather',
         color: Colors.red,
         imageBg: 'lib/assets/tempImages/tempWeather.png',
       ),
-
       const WidgetTextCircleV2(
           // text: 'GoogleMap',
           color: Colors.green,
@@ -93,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
           // text: 'Workout',
           color: Colors.green,
           imageBg: 'lib/assets/tempImages/tempLiveWorkout.png'),
-
       const WidgetTextCircleV2(
           // text: 'Music',
           color: Colors.green,
@@ -127,10 +109,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     void openAppPage() {
       Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => pageInstalledApp));
           context,
           MaterialPageRoute(
-              builder: (context) => globalController.getPageInstallApp()));
+              builder: (context) => globalController.getPageInstalledApp()));
     }
 
     return Scaffold(

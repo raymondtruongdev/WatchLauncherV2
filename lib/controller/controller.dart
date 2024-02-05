@@ -1,22 +1,31 @@
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:watch_launcher/utilts/get_app.dart';
 
 class GlobalController extends GetxController {
   final RxDouble _watchSize = 0.0.obs;
   final RxInt _indexWatchFace = 0.obs;
   late List<Widget> _watchFaceList = [];
   late Widget pageInstalledApp;
+  late Future<List<Application>> installedAppList =
+      GetApp.getInstalledApplications();
 
   RxDouble getWatchSize() => _watchSize;
   RxInt getIndexWatchFace() => _indexWatchFace;
   List<Widget> getWatchFaceList() => _watchFaceList;
-  Widget getPageInstallApp() => pageInstalledApp;
+  Widget getPageInstalledApp() => pageInstalledApp;
+  Future<List<Application>> getInstalledAppList() => installedAppList;
 
   @override
   void onInit() {
     _watchSize.value = 1080.0;
 
     super.onInit();
+  }
+
+  void setInstalledAppList(Future<List<Application>> appList) {
+    installedAppList = appList;
   }
 
   void setPageInstalledApp(Widget newpage) {
