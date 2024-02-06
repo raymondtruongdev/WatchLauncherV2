@@ -98,7 +98,7 @@ class CircleApp extends StatelessWidget {
 
   Future<void> _openApp(Application app) async {
     await LaunchApp.openApp(
-      androidPackageName: 'aa', //app.packageName,
+      androidPackageName: app.packageName,
       iosUrlScheme: '//',
       appStoreLink:
           ('https://play.google.com/store/apps/details?id=${app.packageName}&hl=en&gl=US'),

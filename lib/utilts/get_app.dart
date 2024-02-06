@@ -30,6 +30,7 @@ class GetApp {
     ];
     List<String> ignoreKeyWords = [
       'services',
+      'System Tracing',
     ];
 
 // Find app which is in the list
