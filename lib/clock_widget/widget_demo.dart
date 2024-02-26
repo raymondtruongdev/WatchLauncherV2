@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../template/page_template.dart';
 
 class WidgetTextButtonCircle extends StatelessWidget {
@@ -92,11 +91,6 @@ class WidgetTextCircleV2 extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.black,
-                width: 1.0,
-              ),
               image: imageBg.isNotEmpty
                   ? DecorationImage(
                       image: AssetImage(imageBg),

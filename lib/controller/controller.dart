@@ -31,6 +31,7 @@ class GlobalController extends GetxController {
   RxInt getIndexWatchFace() => _indexWatchFace;
   double getWatchSize() => _watchSize;
   double getScaleRatio() => _scaleRatio;
+  bool isCircleDevice() => _isCircleDevice;
 // ==================== Setters ============================================
   void setInstalledAppList(Future<List<Application>> appList) {
     installedAppList = appList;

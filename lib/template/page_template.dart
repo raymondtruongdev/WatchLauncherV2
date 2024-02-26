@@ -7,7 +7,7 @@ class PageTemplate extends StatelessWidget {
   final Color color;
 
   // Constructor
-  const PageTemplate({Key? key, required this.child, this.color = Colors.black})
+  const PageTemplate({Key? key, required this.child, this.color = Colors.white})
       : super(key: key);
 
   @override
@@ -18,10 +18,11 @@ class PageTemplate extends StatelessWidget {
     double watchSize = (globalController.getWatchSize());
 
     return Scaffold(
-      backgroundColor: color,
+      backgroundColor: globalController.isCircleDevice() ? Colors.black : color,
       body: Center(
         child: ClipOval(
-          child: SizedBox(
+          child: Container(
+            color: globalController.isCircleDevice() ? Colors.black : color,
             width: watchSize,
             height: watchSize,
             child: child,
