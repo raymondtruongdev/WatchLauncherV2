@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'clock_widget/WatchFaceDigital01/wf_digital_01.dart';
 import 'clock_widget/widget_demo.dart';
 
-import 'pages/page_installed_apps_v2.dart';
+import 'pages/page_installed_apps.dart';
 import 'pages/page_watchface.dart';
 import 'utilts/get_app.dart';
 
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Make inital page list
     pages = [
       const WidgetTextCircle(text: 'PAGE1', color: Colors.grey),
-      PageInstalledAppsV2(apps: apps),
+      PageInstalledApps(apps: apps),
       // const WidgetTextCircle(text: 'PAGE2', color: Colors.blueAccent),
       const PageWatchFace(),
       // const WatchFaceDigital01(mycolor: Colors.red),

@@ -44,8 +44,8 @@ dependencies:
   app_settings:
   external_app_launcher:
 
-  weather_app:
-    path: packages/weather_app/
+  # weather_app:
+  #   path: packages/weather_app/
 
 dev_dependencies:
   flutter_test:
