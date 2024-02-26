@@ -38,11 +38,13 @@ dependencies:
   loop_page_view: ^1.2.5
   intl: ^0.19.0
   device_apps: ^2.2.0
-  url_launcher: ^6.0.12
   get: ^4.6.6
   flutter_svg: ^2.0.9
-  app_settings:
-  external_app_launcher:
+  logger: ^2.0.2+1
+  lottie: ^3.1.0
+  http: ^1.2.0
+  app_settings: ^5.1.1
+  external_app_launcher: ^4.0.0
 
   # weather_app:
   #   path: packages/weather_app/
