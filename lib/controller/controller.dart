@@ -65,14 +65,14 @@ class GlobalController extends GetxController {
     if (heightScreen <= widthScreen * 1.1) {
       // heigth < 110% of width => circle face
       _isCircleDevice = true;
-      logger.warning('This is circle device');
+      // logger.warning('This is circle device');
     } else {
       _isCircleDevice = false;
-      logger.warning('This is NOT circle device');
+      // logger.warning('This is NOT circle device');
     }
-    logger.debug('widthScreen Controller: $widthScreen');
-    logger.debug('heightScreen Controller: $heightScreen');
-    logger.debug('ScreenIsCircle Controller: $_isCircleDevice()');
+    // logger.debug('widthScreen Controller: $widthScreen');
+    // logger.debug('heightScreen Controller: $heightScreen');
+    // logger.debug('ScreenIsCircle Controller: $_isCircleDevice()');
 
     widthScreenDevice = widthScreen;
     heightScreenDevice = heightScreen;
