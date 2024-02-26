@@ -141,15 +141,22 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async {
-          // Handle the back button press
-          final int currentPage = _pageController.page!.round();
-          if (currentPage == 1) {
-            openAppPage();
-            return false; // Do not allow the system to pop the page
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) {
+          if (!didPop) {
+            // Handle the back button press
+            final int currentPage = _pageController.page!.round();
+            // In case the current page is Watchface we will open Installed Apps Page
+            if (currentPage == 1) {
+              openAppPage();
+            } else {
+              // In case the current page IS NOT a Watchface we will open WatchFace
+              _pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 5),
+                  curve: Curves.easeOut);
+            }
           }
-          return true; // Allow the system to pop the page in other cases
         },
         child: PageView(
           controller: _pageController,
