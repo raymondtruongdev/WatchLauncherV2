@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
@@ -23,31 +22,18 @@ class MyApp extends StatelessWidget {
     // Set immersive system UI mode for Android (full screen)
     //- However it will make 2 times init app
     // --> can not fix this issue now
+
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
     // Get Size of device
     double widthScreenDevice = MediaQuery.of(context).size.width;
     double heightScreenDevice = MediaQuery.of(context).size.height;
     if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
-      // Set value of Watch Size to Controller
-      globalController.updateWatchSize(widthScreenDevice, heightScreenDevice);
-      // Set the list of Watch Faces to controller
-      globalController.setWatchFaceList(createWatchFaceList());
-      // Set Index of Watch Face to show
-      globalController.setIndexWatchFace(0);
-      // Set page Installed Apps
-      globalController.setPageInstalledApp(
-          PageInstalledApps(apps: globalController.getInstalledAppList()));
-    } else {}
-    if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
-      // return const ChatPage();
       return const MaterialApp(
         home: MyHomePage(),
         debugShowCheckedModeBanner: false,
       );
     } else {
-      // return const Center(child: Text('Loading......'));
-
       return const MaterialApp(
         home: Scaffold(
           body: Center(child: Text('Loading......')),
@@ -69,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    createPages();
   }
 
   void createPages() {
@@ -128,6 +113,17 @@ class _MyHomePageState extends State<MyHomePage> {
     if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
       logger.debug(
           'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
+      // Set value of Watch Size to Controller
+      globalController.updateWatchSize(widthScreenDevice, heightScreenDevice);
+      // Set the list of Watch Faces to controller
+      globalController.setWatchFaceList(createWatchFaceList());
+      // Set Index of Watch Face to show
+      globalController.setIndexWatchFace(0);
+      // Set page Installed Apps
+      globalController.setPageInstalledApp(
+          PageInstalledApps(apps: globalController.getInstalledAppList()));
+
+      createPages();
     } else {
       logger.error(
           'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
