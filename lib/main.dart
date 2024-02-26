@@ -4,11 +4,15 @@ import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
 import 'package:watch_launcher/pages/page_installed_apps.dart';
+import 'package:watch_launcher/utilts/logger_custom.dart';
 import 'clock_widget/widget_demo.dart';
 import 'pages/page_watchface.dart';
 
 final PageController _pageController = PageController(initialPage: 1);
 List<Widget> pages = [];
+CustomLogger logger = CustomLogger();
+final GlobalController globalController =
+    Get.put(GlobalController(), permanent: true);
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -16,28 +20,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set the system UI overlays to FullScreen mode
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    // Set immersive system UI mode for Android (full screen)
+    //- However it will make 2 times init app
+    // --> can not fix this issue now
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    // Use Controller to observer
-    final GlobalController globalController =
-        Get.put(GlobalController(), permanent: true);
-
-    // Set value of Watch Size to Controller
+    // Get Size of device
     double widthScreenDevice = MediaQuery.of(context).size.width;
-    globalController.updateWatchSize(widthScreenDevice);
-    // Set the list of Watch Faces to controller
-    globalController.setWatchFaceList(createWatchFaceList());
-    // Set Index of Watch Face to show
-    globalController.setIndexWatchFace(0);
-    // Set page Installed Apps
-    globalController.setPageInstalledApp(
-        PageInstalledApps(apps: globalController.getInstalledAppList()));
+    double heightScreenDevice = MediaQuery.of(context).size.height;
+    if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
+      // Set value of Watch Size to Controller
+      globalController.updateWatchSize(widthScreenDevice, heightScreenDevice);
+      // Set the list of Watch Faces to controller
+      globalController.setWatchFaceList(createWatchFaceList());
+      // Set Index of Watch Face to show
+      globalController.setIndexWatchFace(0);
+      // Set page Installed Apps
+      globalController.setPageInstalledApp(
+          PageInstalledApps(apps: globalController.getInstalledAppList()));
+    } else {}
+    if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
+      // return const ChatPage();
+      return const MaterialApp(
+        home: MyHomePage(),
+        debugShowCheckedModeBanner: false,
+      );
+    } else {
+      // return const Center(child: Text('Loading......'));
 
-    return const MaterialApp(
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
+      return const MaterialApp(
+        home: Scaffold(
+          body: Center(child: Text('Loading......')),
+        ),
+        debugShowCheckedModeBanner: false,
+      );
+    }
   }
 }
 
@@ -104,8 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalController globalController =
-        Get.put(GlobalController(), permanent: true);
+    // Get Size of device
+    double widthScreenDevice = MediaQuery.of(context).size.width;
+    double heightScreenDevice = MediaQuery.of(context).size.height;
+    if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
+      logger.debug(
+          'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
+    } else {
+      logger.error(
+          'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
+    }
 
     void openAppPage() {
       Navigator.push(
