@@ -36,14 +36,14 @@ class CircleComplication extends StatelessWidget {
   final GaugeColor gaugeColor;
 
   const CircleComplication({
-    Key? key,
+    super.key,
     this.percentage = 0.8,
     required this.title,
     required this.value,
     required this.radius,
     required this.imagePath,
     required this.gaugeColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -13,8 +13,7 @@ import '../../template/page_template.dart';
 class WatchFaceDigital02 extends StatefulWidget {
   final Color? mycolor; // Make color parameter optional
 
-  const WatchFaceDigital02({Key? key, this.mycolor = Colors.green})
-      : super(key: key);
+  const WatchFaceDigital02({super.key, this.mycolor = Colors.green});
 
   @override
   _WatchFaceDigital02State createState() => _WatchFaceDigital02State();
@@ -39,6 +38,7 @@ class _WatchFaceDigital02State extends State<WatchFaceDigital02> {
     });
   }
 
+  // ignore: unused_element
   String _formatTime() {
     return DateFormat('HH:mm:ss').format(_currentTime);
   }

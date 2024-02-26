@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 class DigitalWatch extends StatefulWidget {
   final Color? mycolor; // Make color parameter optional
 
-  const DigitalWatch({Key? key, this.mycolor = Colors.green}) : super(key: key);
+  const DigitalWatch({super.key, this.mycolor = Colors.green});
 
   @override
   _DigitalWatchState createState() => _DigitalWatchState();

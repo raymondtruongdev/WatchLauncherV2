@@ -7,8 +7,8 @@ class PageTemplate extends StatelessWidget {
   final Color color;
 
   // Constructor
-  const PageTemplate({Key? key, required this.child, this.color = Colors.white})
-      : super(key: key);
+  const PageTemplate(
+      {super.key, required this.child, this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {

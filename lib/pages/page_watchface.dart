@@ -4,7 +4,7 @@ import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/pages/page_watchface_selection.dart';
 
 class PageWatchFace extends StatelessWidget {
-  const PageWatchFace({Key? key}) : super(key: key);
+  const PageWatchFace({super.key});
 
   @override
   Widget build(BuildContext context) {

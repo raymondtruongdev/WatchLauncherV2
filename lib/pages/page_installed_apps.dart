@@ -11,7 +11,7 @@ import '../utilts/bubble_len.dart';
 class PageInstalledApps extends StatelessWidget {
   final Future<List<Application>> apps;
 
-  const PageInstalledApps({Key? key, required this.apps}) : super(key: key);
+  const PageInstalledApps({super.key, required this.apps});
   @override
   Widget build(BuildContext context) {
     return PageTemplate(color: Colors.white, child: CircleApp(apps: apps));
@@ -21,7 +21,7 @@ class PageInstalledApps extends StatelessWidget {
 class CircleApp extends StatelessWidget {
   final Future<List<Application>> apps;
 
-  const CircleApp({Key? key, required this.apps}) : super(key: key);
+  const CircleApp({super.key, required this.apps});
 
   @override
   Widget build(BuildContext context) {

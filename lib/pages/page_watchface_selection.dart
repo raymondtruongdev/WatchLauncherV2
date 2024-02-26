@@ -7,7 +7,7 @@ import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/template/page_template.dart';
 
 class PageWatchFaceSelection extends StatelessWidget {
-  const PageWatchFaceSelection({Key? key}) : super(key: key);
+  const PageWatchFaceSelection({super.key});
   @override
   Widget build(BuildContext context) {
     final GlobalController globalController =
@@ -48,10 +48,10 @@ class WatchFaceSelection extends StatelessWidget {
   final int idWatch;
 
   const WatchFaceSelection({
-    Key? key,
+    super.key,
     required this.mywidget,
     required this.idWatch,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,12 +8,11 @@ class WidgetTextButtonCircle extends StatelessWidget {
   final String textButton;
 
   const WidgetTextButtonCircle(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.color,
       required this.onPressed,
-      required this.textButton})
-      : super(key: key);
+      required this.textButton});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +50,7 @@ class WidgetTextButtonCircle extends StatelessWidget {
 class WidgetTextCircle extends StatelessWidget {
   final String text;
   final Color color;
-  const WidgetTextCircle({Key? key, required this.text, required this.color})
-      : super(key: key);
+  const WidgetTextCircle({super.key, required this.text, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +75,7 @@ class WidgetTextCircleV2 extends StatelessWidget {
   final Color color;
   final String imageBg;
   const WidgetTextCircleV2(
-      {Key? key, this.text = '', required this.color, this.imageBg = ''})
-      : super(key: key);
+      {super.key, this.text = '', required this.color, this.imageBg = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +113,7 @@ class WidgetTextCircleV2 extends StatelessWidget {
 class WidgetTextSquare extends StatelessWidget {
   final String text;
   final Color color;
-  const WidgetTextSquare({Key? key, required this.text, required this.color})
-      : super(key: key);
+  const WidgetTextSquare({super.key, required this.text, required this.color});
 
   @override
   Widget build(BuildContext context) {

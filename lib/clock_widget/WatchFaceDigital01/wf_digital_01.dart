@@ -11,8 +11,7 @@ import '../../template/page_template.dart';
 class WatchFaceDigital01 extends StatefulWidget {
   final Color? mycolor; // Make color parameter optional
 
-  const WatchFaceDigital01({Key? key, this.mycolor = Colors.green})
-      : super(key: key);
+  const WatchFaceDigital01({super.key, this.mycolor = Colors.green});
 
   @override
   _WatchFaceDigital01State createState() => _WatchFaceDigital01State();

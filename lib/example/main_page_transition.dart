@@ -347,7 +347,7 @@ class SecondPage extends StatelessWidget {
   final String? title;
 
   /// second page constructor
-  const SecondPage({Key? key, this.title}) : super(key: key);
+  const SecondPage({super.key, this.title});
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments;
@@ -391,7 +391,7 @@ class ThirdPage extends StatelessWidget {
   final String title;
 
   /// second page constructor
-  const ThirdPage({Key? key, required this.title}) : super(key: key);
+  const ThirdPage({super.key, required this.title});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
