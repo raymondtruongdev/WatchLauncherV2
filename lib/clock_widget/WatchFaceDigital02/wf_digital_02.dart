@@ -49,7 +49,7 @@ class _WatchFaceDigital02State extends State<WatchFaceDigital02> {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double watchSize = (globalController.getWatchSize().value);
+    double watchSize = (globalController.getWatchSize());
 
     double scaleRatio = watchSize / 390;
 

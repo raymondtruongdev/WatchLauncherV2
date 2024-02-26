@@ -15,7 +15,7 @@ class PageTemplate extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double watchSize = (globalController.getWatchSize().value);
+    double watchSize = (globalController.getWatchSize());
 
     return Scaffold(
       backgroundColor: color,

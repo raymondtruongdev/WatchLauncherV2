@@ -28,7 +28,7 @@ class CircleApp extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double watchSize = (globalController.getWatchSize().value);
+    double watchSize = (globalController.getWatchSize());
     // We design a watch at 390 resolution, for other screen will be scale to 390
     double scaleRatio = watchSize / 390;
     return Scaffold(

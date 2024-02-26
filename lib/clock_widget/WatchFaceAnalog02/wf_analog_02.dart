@@ -27,7 +27,7 @@ class ClockScreen extends StatelessWidget {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double watchSize = (globalController.getWatchSize().value);
+    double watchSize = (globalController.getWatchSize());
 
     double scaleRatio = watchSize / 390;
 

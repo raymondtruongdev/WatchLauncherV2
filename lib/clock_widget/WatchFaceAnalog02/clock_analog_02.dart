@@ -41,7 +41,7 @@ class _ClockAnalog02State extends State<ClockAnalog02> {
     final GlobalController globalController =
         Get.put(GlobalController(), permanent: true);
 
-    double watchSize = (globalController.getWatchSize().value);
+    double watchSize = (globalController.getWatchSize());
 
     const pivotOffsetMinute = Offset(0, 0);
     const pivotOffsetSecond = Offset(0, 0);
@@ -49,6 +49,7 @@ class _ClockAnalog02State extends State<ClockAnalog02> {
 
     var totalSeconds = _dateTime.second + (_dateTime.millisecond / 1000.0);
     var secondAngle = totalSeconds * 6.0 * pi / 180;
+    // ignore: unused_local_variable
     var milisecondAngle = _dateTime.millisecond / 1000.0 * 6.0 * pi / 180;
     var minuteAngle = (_dateTime.minute * 6 + totalSeconds * 0.1) * 0.0174533;
     final hourAngle = (_dateTime.hour * 30 + _dateTime.minute * 0.5) *
