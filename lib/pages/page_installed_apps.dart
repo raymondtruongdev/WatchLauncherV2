@@ -61,7 +61,7 @@ class CircleApp extends StatelessWidget {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: Image.asset(
-                                  'lib/assets/bg_icon.png',
+                                  'lib/assets/bg_icon795px.png',
                                 ).image,
                                 fit: BoxFit.cover,
                               ),
