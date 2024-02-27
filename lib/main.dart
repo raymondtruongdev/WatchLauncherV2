@@ -4,11 +4,9 @@ import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
 import 'package:watch_launcher/pages/page_installed_apps.dart';
 import 'package:watch_launcher/utilts/logger_custom.dart';
-import 'clock_widget/widget_demo.dart';
-import 'pages/page_watchface.dart';
 
 final PageController _pageController = PageController(initialPage: 1);
-List<Widget> pages = [];
+// List<Widget> pages = [];
 CustomLogger logger = CustomLogger();
 final GlobalController globalController =
     Get.put(GlobalController(), permanent: true);
@@ -57,54 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  void createPages() {
-    // Make inital page list
-    pages = [
-      const WidgetTextCircleV2(
-          // text: 'Wellness',
-          color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempWellness.png'),
-      const PageWatchFace(),
-      const WidgetTextCircleV2(
-        text: 'Weather',
-        color: Colors.red,
-        imageBg: 'lib/assets/tempImages/tempWeather.png',
-      ),
-      // PageInstalledApps(apps: globalController.getInstalledAppList()),
-      const WidgetTextCircleV2(
-          // text: 'GoogleMap',
-          color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempGoogleMap.png'),
-      const WidgetTextCircleV2(
-          // text: 'Workout',
-          color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempLiveWorkout.png'),
-      const WidgetTextCircleV2(
-          // text: 'Music',
-          color: Colors.green,
-          imageBg: 'lib/assets/tempImages/tempMusic.png'),
-      // WidgetTextButtonCircle(
-      //     text: 'Comming Soon',
-      //     color: Colors.white,
-      //     textButton: 'Add Page',
-      //     onPressed: () {
-      //       addNewPage();
-      //     }),
-    ];
-  }
-
-  void addNewPage() {
-    // Add new page into pages list
-    setState(() {
-      pages.add(WidgetTextCircle(
-          text: 'NEW PAGE (${pages.length + 1})', color: Colors.orange));
-
-      // Go to the second page (index 1)
-      _pageController.animateToPage(2,
-          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // Get Size of device
@@ -123,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       globalController.setPageInstalledApp(
           PageInstalledApps(apps: globalController.getInstalledAppList()));
 
-      createPages();
+      globalController.createLauncherPages();
     } else {
       logger.error(
           'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
@@ -156,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: PageView(
           controller: _pageController,
-          children: pages,
+          children: globalController.launcherPages,
         ),
       ),
     );
