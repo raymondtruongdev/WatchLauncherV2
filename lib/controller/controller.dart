@@ -47,7 +47,7 @@ class GlobalController extends GetxController {
       if (value.isNotEmpty) {
         installedAppList = value;
         int numberOfApps = value.length;
-        print('Number of installed apps: $numberOfApps');
+        CustomLogger().debug('Number of installed apps: $numberOfApps');
         appTotal.value = numberOfApps;
       }
     });

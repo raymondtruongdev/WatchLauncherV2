@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
 import 'package:watch_launcher/model/watchface_manager/model_watch_face.dart';
-import 'package:watch_launcher/pages/page_installed_apps.dart';
 import 'package:watch_launcher/utilts/logger_custom.dart';
 
 final PageController _pageController = PageController(initialPage: 1);
-// List<Widget> pages = [];
-CustomLogger logger = CustomLogger();
 final GlobalController globalController =
     Get.put(GlobalController(), permanent: true);
 void main() => runApp(const MyApp());
@@ -29,9 +26,9 @@ class _MyAppState extends State<MyApp> {
     _appIUEvents.appEvents.listen((event) {
       globalController.updateInstalledAppList();
       if (event.type == IUEventType.installed) {
-        print('App installed: ${event.packageName}');
+        CustomLogger().debug('App installed: ${event.packageName}');
       } else {
-        print('App uninstalled: ${event.packageName}');
+        CustomLogger().debug('App uninstalled: ${event.packageName}');
       }
     });
     super.initState();
@@ -89,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double widthScreenDevice = MediaQuery.of(context).size.width;
     double heightScreenDevice = MediaQuery.of(context).size.height;
     if ((widthScreenDevice > 0) && (heightScreenDevice > 0)) {
-      logger.debug(
+      CustomLogger().debug(
           'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
       // Set value of Watch Size to Controller
       globalController.updateWatchSize(widthScreenDevice, heightScreenDevice);
@@ -102,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       globalController.createLauncherPages();
     } else {
-      logger.error(
+      CustomLogger().error(
           'HomePage: Width: $widthScreenDevice, Height: $heightScreenDevice');
     }
 
@@ -120,8 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!didPop) {
             // Handle the back button press
             final int currentPage = _pageController.page!.round();
-            // In case the current page is Watchface we will open Installed Apps Page
             if (currentPage == 1) {
+              // We init page index==1 (Watchface) of _pageController list is the first element of Stack ,
+              // So in case last items in Stack is 1 we do not allow user to do Pop and close app. We will open the Installed Apps page
               openAppPage();
             } else {
               // In case the current page IS NOT a Watchface we will open WatchFace

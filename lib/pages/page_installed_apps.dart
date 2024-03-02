@@ -1,11 +1,8 @@
 import 'package:external_app_launcher/external_app_launcher.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:device_apps/device_apps.dart';
-
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
-
 import '../template/page_template.dart';
 import '../utilts/bubble_len.dart';
 
