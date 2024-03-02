@@ -1,4 +1,5 @@
 import 'package:external_app_launcher/external_app_launcher.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:device_apps/device_apps.dart';
 
@@ -9,19 +10,16 @@ import '../template/page_template.dart';
 import '../utilts/bubble_len.dart';
 
 class PageInstalledApps extends StatelessWidget {
-  final Future<List<Application>> apps;
+  const PageInstalledApps({super.key});
 
-  const PageInstalledApps({super.key, required this.apps});
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(color: Colors.white, child: CircleApp(apps: apps));
+    return const PageTemplate(color: Colors.white, child: CircleApp());
   }
 }
 
 class CircleApp extends StatelessWidget {
-  final Future<List<Application>> apps;
-
-  const CircleApp({super.key, required this.apps});
+  const CircleApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,69 +29,52 @@ class CircleApp extends StatelessWidget {
     double watchSize = (globalController.getWatchSize());
     // We design a watch at 390 resolution, for other screen will be scale to 390
     double scaleRatio = watchSize / 390;
-    return Scaffold(
-      body: FutureBuilder<List<Application>>(
-        future: apps,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Center(
-                child: Text('Error loading installed apps'),
-              );
-            } else {
-              List<Application> installedApps = snapshot.data!;
-              return PageTemplate(
-                child: Center(
-                  child: BubbleLens(
-                      width: watchSize,
-                      height: watchSize,
-                      size: 100 * scaleRatio,
-                      paddingX: 5 * scaleRatio,
-                      paddingY: 4 * scaleRatio,
-                      color: Colors.black,
-                      widgets: installedApps.map((app) {
-                        return GestureDetector(
-                          onTap: () {
-                            _openApp(app);
-                          },
+    return Obx(() => globalController.appTotal < 0
+        ? Container()
+        : Scaffold(
+            body: PageTemplate(
+            child: Center(
+              child: BubbleLens(
+                  width: watchSize,
+                  height: watchSize,
+                  size: 100 * scaleRatio,
+                  paddingX: 5 * scaleRatio,
+                  paddingY: 4 * scaleRatio,
+                  color: Colors.black,
+                  widgets: globalController.getInstalledAppList().map((app) {
+                    return GestureDetector(
+                      onTap: () {
+                        _openApp(app);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: Image.asset(
+                              'lib/assets/bg_icon795px.png',
+                            ).image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Center(
                           child: Container(
+                            width: 55 * scaleRatio,
+                            height: 55 * scaleRatio,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: Image.asset(
-                                  'lib/assets/bg_icon795px.png',
-                                ).image,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Center(
-                              child: Container(
-                                width: 55 * scaleRatio,
-                                height: 55 * scaleRatio,
-                                decoration: BoxDecoration(
-                                  image: (app is ApplicationWithIcon)
-                                      ? DecorationImage(
-                                          image: MemoryImage(app.icon),
-                                          fit: BoxFit.cover,
-                                        )
-                                      : null,
-                                ),
-                              ),
+                              image: (app is ApplicationWithIcon)
+                                  ? DecorationImage(
+                                      image: MemoryImage(app.icon),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : null,
                             ),
                           ),
-                        );
-                      }).toList()),
-                ),
-              );
-            }
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-    );
+                        ),
+                      ),
+                    );
+                  }).toList()),
+            ),
+          )));
   }
 
   Future<void> _openApp(Application app) async {

@@ -1,3 +1,4 @@
+import 'package:app_install_events/app_install_events.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watch_launcher/controller/controller.dart';
@@ -12,8 +13,35 @@ final GlobalController globalController =
     Get.put(GlobalController(), permanent: true);
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late AppIUEvents _appIUEvents;
+  @override
+  void initState() {
+    _appIUEvents = AppIUEvents();
+
+    _appIUEvents.appEvents.listen((event) {
+      globalController.updateInstalledAppList();
+      if (event.type == IUEventType.installed) {
+        print('App installed: ${event.packageName}');
+      } else {
+        print('App uninstalled: ${event.packageName}');
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _appIUEvents.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // Set Index of Watch Face to show
       globalController.setIndexWatchFace(0);
       // Set page Installed Apps
-      globalController.setPageInstalledApp(
-          PageInstalledApps(apps: globalController.getInstalledAppList()));
+      globalController.setPageInstalledApp();
 
       globalController.createLauncherPages();
     } else {

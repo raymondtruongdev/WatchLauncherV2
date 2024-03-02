@@ -2,6 +2,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:watch_launcher/clock_widget/widget_demo.dart';
+import 'package:watch_launcher/pages/page_installed_apps.dart';
 import 'package:watch_launcher/pages/page_watchface.dart';
 import 'package:watch_launcher/utilts/get_app.dart';
 import 'package:watch_launcher/utilts/logger_custom.dart';
@@ -11,10 +12,12 @@ class GlobalController extends GetxController {
   // ignore: unnecessary_overrides
   void onInit() {
     super.onInit();
+    updateInstalledAppList();
   }
 
   // ==================== Variables ============================================
   final RxInt _indexWatchFace = 0.obs;
+  final RxInt appTotal = 0.obs;
   late double _watchSize = 1080.0;
   double widthScreenDevice = 0.0;
   double heightScreenDevice = 0.0;
@@ -23,25 +26,35 @@ class GlobalController extends GetxController {
 
   late List<Widget> _watchFaceList = [];
   late Widget pageInstalledApp;
-  late Future<List<Application>> installedAppList =
-      GetApp.getInstalledApplications();
+  List<Application> installedAppList = [];
   late List<Widget> launcherPages = [];
 
 // ==================== Getters ============================================
   List<Widget> getWatchFaceList() => _watchFaceList;
   Widget getPageInstalledApp() => pageInstalledApp;
-  Future<List<Application>> getInstalledAppList() => installedAppList;
+  List<Application> getInstalledAppList() => installedAppList;
   RxInt getIndexWatchFace() => _indexWatchFace;
   double getWatchSize() => _watchSize;
   double getScaleRatio() => _scaleRatio;
   bool isCircleDevice() => _isCircleDevice;
+
 // ==================== Setters ============================================
-  void setInstalledAppList(Future<List<Application>> appList) {
-    installedAppList = appList;
+  void updateInstalledAppList() async {
+    // installedAppList = GetApp.getInstalledApplications();
+
+    Future<List<Application>> appsFuture = GetApp.getInstalledApplications();
+    await appsFuture.then((value) {
+      if (value.isNotEmpty) {
+        installedAppList = value;
+        int numberOfApps = value.length;
+        print('Number of installed apps: $numberOfApps');
+        appTotal.value = numberOfApps;
+      }
+    });
   }
 
-  void setPageInstalledApp(Widget newpage) {
-    pageInstalledApp = newpage;
+  void setPageInstalledApp() async {
+    pageInstalledApp = const PageInstalledApps();
   }
 
   void setIndexWatchFace(int newIndexWatchFace) {
