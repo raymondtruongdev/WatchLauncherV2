@@ -29,14 +29,22 @@ class Page0 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async {
-          // Handle the back button press
-          final int currentPage = _pageController.page!.round();
-          if (currentPage == 1) {
-            return false; // Do not allow the system to pop the page
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop) {
+          if (!didPop) {
+            // Handle the back button press
+            final int currentPage = _pageController.page!.round();
+            if (currentPage == 1) {
+              // We init page index==1 (Page2) of _pageController list is the first element of Stack ,
+              // So in case last item in Stack is 1 we do not allow user to do Pop and close app
+            } else {
+              // In case the current page IS NOT Page2 we will open Page2
+              _pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 5),
+                  curve: Curves.easeOut);
+            }
           }
-          return true; // Allow the system to pop the page in other cases
         },
         child: PageView(
           controller: _pageController,
@@ -116,9 +124,12 @@ class Page3 extends StatelessWidget {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.pop(context);
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.linear,
+              );
             },
-            child: const Text('Go back to Page 3'),
+            child: const Text('Go back to Page 2'),
           ),
         ),
       ),
